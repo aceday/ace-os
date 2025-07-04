@@ -22,6 +22,11 @@ PKGS_TO_INSTALL=(
     moreutils
     go
     rust
+    fastfetch
+    vlc
+    mpv
+    git
+    gh
 )
 
 # Install packages from fedora repos
