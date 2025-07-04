@@ -3,7 +3,7 @@
 ARG FEDORA_VERSION=42
 ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64 
 ARG KERNEL_FLAVOR=bazzite
-ARG BASE_IMAGE_NAME=silverblue
+ARG BASE_IMAGE_NAME=bluefin
 
 FROM scratch AS ctx
 COPY build_files /
