@@ -56,7 +56,7 @@ fi
 wget https://dl.google.com/linux/linux_signing_key.pub
 sudo rpm --import linux_signing_key.pub
 dnf5 update -y
-dnf5 install -y google-chrome
+dnf5 install -y google-chrome-stable
 
 
 # VS Code
