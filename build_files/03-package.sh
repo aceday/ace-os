@@ -28,7 +28,7 @@ PKGS_TO_INSTALL=(
     gh
     ffmpeg
     darktable
-    os-probe
+    os-prober
 )
 
 # PKGS_TO_EXCLUDE=(
