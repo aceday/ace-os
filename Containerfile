@@ -65,7 +65,15 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/04-patch.sh && \
     /ctx/cleanup.sh
-    
+
+# 09-config
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/09-config.sh && \
+    /ctx/cleanup.sh
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
