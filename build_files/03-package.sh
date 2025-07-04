@@ -23,8 +23,8 @@ PKGS_TO_INSTALL=(
     go
     rust
     fastfetch
-    vlc
     vlc-plugins-freeworld
+    vlc
     mpv
     git
     gh
