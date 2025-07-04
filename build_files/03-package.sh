@@ -34,5 +34,11 @@ if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
 fi
 
+# Google Chrome
+curl -fLo /tmp/google-chrome.rpm https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+dnf5 install -y /tmp/google-chrome.rpm
+rm -f /tmp/google-chrome.rpm
+
+
 echo "::endgroup::"
 
