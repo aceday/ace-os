@@ -80,4 +80,6 @@ dnf5 -y config-manager setopt "*rpmfusion*".priority=5 "*rpmfusion*".exclude="me
 dnf5 -y config-manager setopt "*fedora*".exclude="mesa-* kernel-core-* kernel-modules-* kernel-uki-virt-*"
 dnf5 -y config-manager setopt "*staging*".exclude="scx-scheds kf6-* mesa* mutter* rpm-ostree* systemd* gnome-shell gnome-settings-daemon gnome-control-center gnome-software libadwaita tuned*"
 
+# TLP UI
+sudo dnf copr enable sunwire/tlpui
 echo "::endgroup::"
