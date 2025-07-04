@@ -18,14 +18,13 @@ IMAGE_INFO="/usr/share/ublue-os/image-info.json"
 IMAGE_REF="ace"
 
 # Image Flavor
-# image_flavor="main"
-image_flavor="dx"
-# if [[ "${IMAGE_NAME}" =~ nvidia ]]; then
-#   image_flavor="nvidia"
-# fi
-# if [[ "${IMAGE_NAME}" =~ nvidia-open ]]; then
-#   image_flavor="nvidia-open"
-# fi
+image_flavor="main"
+if [[ "${IMAGE_NAME}" =~ nvidia ]]; then
+  image_flavor="nvidia"
+fi
+if [[ "${IMAGE_NAME}" =~ nvidia-open ]]; then
+  image_flavor="nvidia-open"
+fi
 
 cat >$IMAGE_INFO <<EOF
 {
