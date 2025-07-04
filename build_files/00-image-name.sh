@@ -14,7 +14,8 @@ CODE_NAME="ace"
 VERSION="${VERSION:-00.00000000}"
 
 IMAGE_INFO="/usr/share/ublue-os/image-info.json"
-IMAGE_REF="ostree-image-signed:docker://ghcr.io/$IMAGE_VENDOR/$IMAGE_NAME"
+# IMAGE_REF="ostree-image-signed:docker://ghcr.io/$IMAGE_VENDOR/$IMAGE_NAME"
+IMAGE_REF="ace"
 
 # Image Flavor
 image_flavor="main"
