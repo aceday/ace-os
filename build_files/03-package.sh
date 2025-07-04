@@ -15,14 +15,11 @@ PKGS_TO_INSTALL=(
     obs-studio
     tlp
     tlp-rdw
-    tlpui
     fuse
     gcr3
     hexedit
     nodejs-npm
     moreutils
-    firefox
-    torbrowser
     go
     rust
 )
