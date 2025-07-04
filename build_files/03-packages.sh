@@ -21,7 +21,10 @@ PKGS_TO_INSTALL = (
     hexedit
     nodejs-npm
     moreutils
-
+    firefox
+    torbrowser
+    go
+    rust
 )
 
 # Install packages from fedora repos
