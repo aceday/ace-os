@@ -21,7 +21,7 @@ on:
     paths:
       - './disk_config/disk.toml'
       - './disk_config/iso.toml'
-      - './.github/workflows/build-disk.yml'
+      - './.github/workflows/build-iso.yml'
 
 env:
   IMAGE_NAME: ${{ github.event.repository.name }}
