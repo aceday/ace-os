@@ -1,8 +1,8 @@
 # Allow build scripts to be referenced without being copied into the final image
 
 ARG FEDORA_VERSION=42
-ARG KERNEL_VERSION=6.15.4-103.bluefin.fc42.x86_64 
-ARG KERNEL_FLAVOR=bluefin
+ARG KERNEL_VERSION=6.15.4-103.bluefin-dx.fc42.x86_64 
+ARG KERNEL_FLAVOR=bluefin-dx
 ARG BASE_IMAGE_NAME=bluefin-dx
 
 FROM scratch AS ctx
