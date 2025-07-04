@@ -29,6 +29,10 @@ PKGS_TO_INSTALL=(
     ffmpeg
     darktable
     os-prober
+
+    mysql-server
+    mysql-test
+    mysql-common
 )
 
 # PKGS_TO_EXCLUDE=(
