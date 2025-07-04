@@ -23,21 +23,20 @@ PKGS_TO_INSTALL=(
     go
     rust
     fastfetch
-    vlc-plugins-base
-    vlc
     mpv
     git
     gh
 )
 
-PKGS_TO_EXCLUDE=(
-    vlc-plugins-freeworld
-)
+# PKGS_TO_EXCLUDE=(
+#     vlc-plugins-freeworld
+# )
 
 
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
-    EXCLUDES=$(IFS=, ; echo "${PKGS_TO_EXCLUDE[*]}")
-    dnf5 install -y --exclude="$EXCLUDES" "${PKGS_TO_INSTALL[@]}"
+    dnf5 install -y "${PKGS_TO_INSTALL[@]}"
+    # EXCLUDES=$(IFS=, ; echo "${PKGS_TO_EXCLUDE[*]}")
+    # dnf5 install -y --exclude="$EXCLUDES" "${PKGS_TO_INSTALL[@]}"
 fi
 
 # Google Chrome
