@@ -23,16 +23,21 @@ PKGS_TO_INSTALL=(
     go
     rust
     fastfetch
-    vlc-plugins-freeworld
+    vlc-plugins-base
     vlc
     mpv
     git
     gh
 )
 
-# Install packages from fedora repos, prefer vlc-plugins-freeworld and exclude vlc-plugins-base
+PKGS_TO_EXCLUDE=(
+    vlc-plugins-freeworld
+)
+
+
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
-    dnf5 install -y --exclude=vlc-plugins-base "${PKGS_TO_INSTALL[@]}"
+    EXCLUDES=$(IFS=, ; echo "${PKGS_TO_EXCLUDE[*]}")
+    dnf5 install -y --exclude="$EXCLUDES" "${PKGS_TO_INSTALL[@]}"
 fi
 
 # Google Chrome
