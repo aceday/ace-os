@@ -54,7 +54,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/03-patch.sh && \
+    /ctx/02-patch.sh && \
     /ctx/cleanup.sh
 
 # 03-packages
