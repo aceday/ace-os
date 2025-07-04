@@ -7,3 +7,10 @@ if grep -q '^GRUB_DISABLE_OS_PROBER=' "$grub_cfg"; then
 else
     echo 'GRUB_DISABLE_OS_PROBER=false' >> "$grub_cfg"
 fi
+
+
+# TLP Service
+cp ./config/tlp.conf /etc/tlp.conf
+systemctl enable --now tlp.service
+tlp start
+

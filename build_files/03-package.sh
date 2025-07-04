@@ -35,7 +35,6 @@ PKGS_TO_INSTALL=(
     mysql-common
 
     nmap
-    wifite
 )
 
 # PKGS_TO_EXCLUDE=(
