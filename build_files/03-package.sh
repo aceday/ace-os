@@ -55,14 +55,14 @@ fi
 # rm -f /tmp/chrome.rpm
 wget https://dl.google.com/linux/linux_signing_key.pub
 sudo rpm --import linux_signing_key.pub
-dnf5 update
+dnf5 update -y
 dnf5 install -y google-chrome
 
 
 # VS Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-dnf check-update
+dnf check-update -y
 dnf install -y code
 
 
