@@ -25,7 +25,6 @@ PKGS_TO_INSTALL=(
     torbrowser
     go
     rust
-    ntfs-3g
 )
 
 # Install packages from fedora repos
