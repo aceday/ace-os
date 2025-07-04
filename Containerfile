@@ -1,9 +1,15 @@
 # Allow build scripts to be referenced without being copied into the final image
+
+ARG FEDORA_VERSION=42
+ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64 
+ARG KERNEL_FLAVOR=bazzite
+ARG BASE_IMAGE_NAME=silverblue
+
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-FROM ghcr.io/ublue-os/bazzite:stable
+FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
