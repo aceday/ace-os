@@ -3,7 +3,7 @@
 ARG FEDORA_VERSION=42
 ARG KERNEL_VERSION=6.15.4-103.bluefin.fc42.x86_64 
 ARG KERNEL_FLAVOR=bluefin
-ARG BASE_IMAGE_NAME=bluefin
+ARG BASE_IMAGE_NAME=bluefin-dx
 
 FROM scratch AS ctx
 COPY build_files /
@@ -36,12 +36,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/cleanup.sh
 
 # 00-image-name
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/00-image-name.sh && \
-    ostree container commit
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/00-image-name.sh && \
+#     ostree container commit
 
 # 01-repos
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
