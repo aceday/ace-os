@@ -4,7 +4,7 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 shopt -s nullglob
 
-PKGS_TO_INSTALL = (
+PKGS_TO_INSTALL=(
     btop
     nvim
     rclone
