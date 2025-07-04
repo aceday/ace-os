@@ -1,17 +1,15 @@
 # Allow build scripts to be referenced without being copied into the final image
 
 ARG FEDORA_VERSION=42
-ARG KERNEL_VERSION=6.15.4-103.bluefin.fc42.x86_64 
-ARG KERNEL_FLAVOR=bluefin
-ARG BASE_IMAGE_NAME=bluefin-dx
+ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64 
+ARG KERNEL_FLAVOR=bazzite
+ARG BASE_IMAGE_NAME=bluefin
 
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-# FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
-FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_VERSION}  AS base
-
+FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
