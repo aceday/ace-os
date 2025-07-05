@@ -5,13 +5,13 @@ set -ouex pipefail
 shopt -s nullglob
 
 
-PKGS_TO_UNINSTALL=(
-    vlc-plugins-freeworld
-)
+# PKGS_TO_UNINSTALL=(
+#     vlc-plugins-freeworld
+# )
 
-if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
-    dnf5 remove -y "${PKGS_TO_UNINSTALL[@]}"
-fi
+# if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
+#     dnf5 remove -y "${PKGS_TO_UNINSTALL[@]}"
+# fi
 
 PKGS_TO_INSTALL=(
     btop
@@ -43,7 +43,7 @@ PKGS_TO_INSTALL=(
     mysql-common
 
     nmap
-    vlc
+    # vlc
 
     # discord
     duf
