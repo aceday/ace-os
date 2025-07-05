@@ -35,6 +35,15 @@ PKGS_TO_INSTALL=(
 
     nmap
     vlc
+
+    # discord
+    duf
+    ncdu
+    android-tools
+    zsh
+    zsh-autocomplete
+    zsh-autosuggestions
+    util-linux
 )
 
 # PKGS_TO_EXCLUDE=(

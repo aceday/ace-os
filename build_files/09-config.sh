@@ -14,3 +14,5 @@ cp ./config/tlp.conf /etc/tlp.conf
 systemctl enable --now tlp.service
 tlp start
 
+# ZSH mode
+chsh -s /bin/zsh
