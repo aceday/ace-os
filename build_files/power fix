@@ -12,6 +12,7 @@ fi
 # TLP Service
 cp ./config/tlp.conf /etc/tlp.conf
 systemctl enable --now tlp.service
+systemctl start tlp
 tlp start
 
 # ZSH mode
