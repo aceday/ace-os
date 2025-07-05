@@ -21,6 +21,7 @@ COPRS=(
     bazzite-org/webapp-manager
     ublue-os/packages
     ublue-os/staging
+    medzik/vscode
 
     # Fonts
     che/nerd-fonts
