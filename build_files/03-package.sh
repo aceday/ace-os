@@ -53,7 +53,7 @@ PKGS_TO_INSTALL=(
     zsh-autocomplete
     zsh-autosuggestions
     util-linux
-    scrcpy
+    # scrcpy
 )
 
 # PKGS_TO_EXCLUDE=(
