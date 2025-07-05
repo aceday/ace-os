@@ -28,13 +28,13 @@ PKGS_TO_INSTALL=(
     gh
     ffmpeg
     darktable
-    os-prober
 
     mysql-server
     mysql-test
     mysql-common
 
     nmap
+    vlc
 )
 
 # PKGS_TO_EXCLUDE=(
@@ -46,6 +46,14 @@ if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
     # EXCLUDES=$(IFS=, ; echo "${PKGS_TO_EXCLUDE[*]}")
     # dnf5 install -y --exclude="$EXCLUDES" "${PKGS_TO_INSTALL[@]}"
+fi
+
+PKGS_TO_UNINSTALL=(
+    nvtop
+)
+
+if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
+    dnf5 remove -y "${PKGS_TO_UNINSTALL[@]}"
 fi
 
 # Google Chrome
