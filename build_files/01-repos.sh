@@ -22,14 +22,16 @@ COPRS=(
     ublue-os/packages
     ublue-os/staging
 
+    ublue-os/bluefin
+    
     # Fonts
     che/nerd-fonts
 
     # Gaming
-    hikariknight/looking-glass-kvmfr
-    lizardbyte/beta
-    mavit/discover-overlay
-    rok/cdemu
+    # hikariknight/looking-glass-kvmfr
+    # lizardbyte/beta
+    # mavit/discover-overlay
+    # rok/cdemu
 
     # Hardware
     hhd-dev/hhd
@@ -37,6 +39,8 @@ COPRS=(
     # Multimedia
     ycollet/audinux
 )
+
+
 
 for COPR in "${COPRS[@]}"; do
     echo "Enabling copr: $COPR"

@@ -29,7 +29,8 @@ PKGS_TO_INSTALL=(
     ffmpeg
     darktable
     os-prober
-
+    discord
+    
     mysql-server
     mysql-test
     mysql-common
