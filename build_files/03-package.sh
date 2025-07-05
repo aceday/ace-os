@@ -4,6 +4,15 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 shopt -s nullglob
 
+
+PKGS_TO_UNINSTALL=(
+    vlc-plugins-freeworld
+)
+
+if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
+    dnf5 remove -y "${PKGS_TO_UNINSTALL[@]}"
+fi
+
 PKGS_TO_INSTALL=(
     btop
     nvim
@@ -44,6 +53,7 @@ PKGS_TO_INSTALL=(
     zsh-autocomplete
     zsh-autosuggestions
     util-linux
+    scrcpy
 )
 
 # PKGS_TO_EXCLUDE=(
