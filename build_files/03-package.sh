@@ -46,10 +46,10 @@ if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     # dnf5 install -y --exclude="$EXCLUDES" "${PKGS_TO_INSTALL[@]}"
 fi
 
-# Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/chrome.rpm
-dnf5 install -y /tmp/chrome.rpm
-rm -f /tmp/chrome.rpm
+# # Google Chrome
+# wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/chrome.rpm
+# dnf5 install -y /tmp/chrome.rpm
+# rm -f /tmp/chrome.rpm
 
 echo "::endgroup::"
 
