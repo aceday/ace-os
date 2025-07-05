@@ -15,4 +15,4 @@ systemctl enable --now tlp.service
 tlp start
 
 # ZSH mode
-chsh -s /bin/zsh
+# chsh -s /bin/zsh
