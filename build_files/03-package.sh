@@ -57,7 +57,7 @@ PKGS_TO_INSTALL=(
 
     wine
     wine-mono
-    wine-gecko
+    # wine-gecko
 )
 
 # PKGS_TO_EXCLUDE=(
