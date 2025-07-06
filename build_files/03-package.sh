@@ -111,6 +111,7 @@ TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' /usr/share/ublue-tr/c
 echo $TODAYS_CHROME_VERSION > /usr/share/ublue-tr/chrome-workarounds/google-chrome-current-version
 
 echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
+dnf5 install -y google-chrome-stable
 
 
 
