@@ -55,6 +55,8 @@ PKGS_TO_INSTALL=(
     util-linux
     # scrcpy
 
+    distrobox
+    podman
     wine
     wine-mono
     # wine-gecko
