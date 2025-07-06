@@ -57,11 +57,18 @@ PKGS_TO_INSTALL=(
     util-linux
     # scrcpy
 
+
     distrobox
     podman
     wine
     wine-mono
     # wine-gecko
+
+    # Multimedia
+    shotcut
+    darktable
+    gimp
+    blender
 )
 
 # PKGS_TO_EXCLUDE=(
