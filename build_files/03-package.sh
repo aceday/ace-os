@@ -69,6 +69,9 @@ PKGS_TO_INSTALL=(
     darktable
     gimp
     blender
+
+   qemu-device-display-virtio-gpu
+   qemu-device-display-virtio-gpu-gl
 )
 
 # PKGS_TO_EXCLUDE=(
