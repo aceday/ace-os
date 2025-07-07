@@ -43,7 +43,10 @@ PKGS_TO_INSTALL=(
     mysql-common
 
     nmap
-    # vlc
+
+    p7zip
+    p7zip-plugins
+    rar
 
     # discord
     duf
@@ -69,9 +72,37 @@ PKGS_TO_INSTALL=(
     darktable
     gimp
     blender
+    
+    # QEMU
+    qemu-device-display-virtio-gpu
+    qemu-device-display-virtio-gpu-gl
 
-   qemu-device-display-virtio-gpu
-   qemu-device-display-virtio-gpu-gl
+    # GNOME Extensions
+    gnome-shell-extension-appindicator
+
+    # File System & Storage
+    btrfs-assistant # BTRFS GUI tool
+    duperemove
+    f3 # Flash memory tester
+    lzip
+    snapper # BTRFS snapshot management   
+
+    # Hardware & Drivers
+    ddcutil # DDC/CI control for monitors
+    i2c-tools
+    input-remapper
+    iwd # iNet Wireless Daemon
+    libcec # HDMI CEC library
+    lm_sensors
+
+    # Display & Graphics
+    cage # Wayland compositor for single applications
+    extest.i686 # X extension tester
+    vulkan-tools
+    wlr-randr # Wayland output management
+    xrandr
+
+    
 )
 
 # PKGS_TO_EXCLUDE=(
