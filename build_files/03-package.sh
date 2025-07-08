@@ -39,6 +39,7 @@ PKGS_TO_INSTALL=(
     darktable
     torbrowser-launcher
     libreoffice
+    aria2
 
     mysql-server
     mysql-test
