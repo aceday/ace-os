@@ -38,6 +38,7 @@ PKGS_TO_INSTALL=(
     ffmpeg
     darktable
     torbrowser-launcher
+    libreoffice
 
     mysql-server
     mysql-test
