@@ -62,7 +62,9 @@ PKGS_TO_INSTALL=(
     hashcat
     util-linux
     # scrcpy
-
+    
+    # Java
+    java-21-openjdk
 
     distrobox
     podman
