@@ -70,6 +70,10 @@ PKGS_TO_INSTALL=(
     wine-mono
     # wine-gecko
 
+    # Pen
+    wireshark
+    
+
     # Multimedia
     shotcut
     darktable
