@@ -24,3 +24,5 @@ sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvi
 sed -i 's/^#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/' /etc/libvirt/libvirtd.conf
 sed -i 's/^#user = "qemu"/user = "mac"/' /etc/libvirt/qemu.conf
 
+# Test kernel print
+echo "Kernel version: $(uname -r)"
