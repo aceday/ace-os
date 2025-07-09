@@ -12,13 +12,15 @@ dnf5 -y install dnf5-plugins
 
 # Enable COPR repositories
 COPRS=(
-    # Bazzite & Ublue
-    bazzite-org/bazzite
-    bazzite-org/bazzite-multilib
-    bazzite-org/LatencyFleX
-    bazzite-org/obs-vkcapture
-    bazzite-org/rom-properties
-    bazzite-org/webapp-manager
+    # Bazzite
+    # bazzite-org/bazzite
+    # bazzite-org/bazzite-multilib
+    # bazzite-org/LatencyFleX
+    # bazzite-org/obs-vkcapture
+    # bazzite-org/rom-properties
+    # bazzite-org/webapp-manager
+    
+    # Ublue
     ublue-os/packages
     ublue-os/staging
     medzik/vscode
@@ -37,6 +39,8 @@ COPRS=(
 
     # Multimedia
     ycollet/audinux
+
+    sunwire/tlpui
 )
 
 for COPR in "${COPRS[@]}"; do
