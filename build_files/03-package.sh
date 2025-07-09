@@ -86,9 +86,6 @@ PKGS_TO_INSTALL=(
     qemu-device-display-virtio-gpu
     qemu-device-display-virtio-gpu-gl
 
-    # GNOME Extensions
-    gnome-shell-extension-appindicator
-
     # File System & Storage
     btrfs-assistant # BTRFS GUI tool
     duperemove

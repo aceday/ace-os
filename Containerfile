@@ -75,6 +75,14 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/04-patch.sh && \
     /ctx/cleanup.sh
 
+# 05-GNOME
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/05-gnome.sh && \
+    /ctx/cleanup.sh
+
 # 09-config
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
