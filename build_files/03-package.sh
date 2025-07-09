@@ -108,7 +108,7 @@ PKGS_TO_INSTALL=(
     wlr-randr # Wayland output management
     xrandr
 
-    
+    virtualbox
 )
 
 # PKGS_TO_EXCLUDE=(
