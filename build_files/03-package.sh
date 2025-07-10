@@ -51,6 +51,7 @@ PKGS_TO_INSTALL=(
     p7zip-plugins
     rar
 
+    ghex
     # discord
     duf
     ncdu
@@ -108,7 +109,7 @@ PKGS_TO_INSTALL=(
     wlr-randr # Wayland output management
     xrandr
 
-    # virtualbox
+    virtualbox
     tlpui
 )
 
