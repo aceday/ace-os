@@ -93,6 +93,7 @@ PKGS_TO_INSTALL=(
     f3 # Flash memory tester
     lzip
     snapper # BTRFS snapshot management   
+    picocom
 
     # Hardware & Drivers
     ddcutil # DDC/CI control for monitors
