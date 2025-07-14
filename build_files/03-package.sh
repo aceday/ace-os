@@ -40,6 +40,7 @@ PKGS_TO_INSTALL=(
     torbrowser-launcher
     libreoffice
     aria2
+    mycli
 
     mysql-server
     mysql-test
