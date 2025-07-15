@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -oue pipefail
+
 echo "::group:: ===$(basename "$0")==="
 
 set -ouex pipefail
@@ -147,7 +150,8 @@ fi
 #sudo rpm --import linux_signing_key.pub
 #dnf5 update -y
 #dnf5 install -y google-chrome-stable
-set -oue pipefail
+
+# Google Chrome V2
 mkdir -p /usr/share/ublue-tr/chrome-workarounds
 mkdir -p /tmp/chrome-workarounds
 echo "Downloading Google Signing Key"
@@ -170,6 +174,10 @@ echo $TODAYS_CHROME_VERSION > /usr/share/ublue-tr/chrome-workarounds/google-chro
 echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # dnf5 install -y google-chrome-stable
 
+# VS Code v2
+wget https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
+sudo dnf install ./code-latest-x64.rpm
+rm ./code-latest-x64.rpm
 
 
 
