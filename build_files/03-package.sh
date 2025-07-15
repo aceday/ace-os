@@ -176,7 +176,7 @@ echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 
 # VS Code v2
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
-sudo dnf install ./code-latest-x64.rpm
+sudo dnf install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
 
 
