@@ -65,7 +65,8 @@ PKGS_TO_INSTALL=(
     util-linux
     # scrcpy
     python3-pip
-    # Java
+    python3.12
+# Java
     java-21-openjdk
 
     distrobox
