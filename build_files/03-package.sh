@@ -64,7 +64,7 @@ PKGS_TO_INSTALL=(
     hashcat
     util-linux
     # scrcpy
-    
+    python3-pip
     # Java
     java-21-openjdk
 
