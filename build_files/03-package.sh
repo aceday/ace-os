@@ -81,7 +81,10 @@ PKGS_TO_INSTALL=(
 
     # Pen
     wireshark
-    
+    aircrack-ng
+    hashcat
+    reaver
+    cowpatty
 
     # Multimedia
     shotcut
