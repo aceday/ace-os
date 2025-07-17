@@ -187,11 +187,11 @@ rm ./code-latest-x64.rpm
 # dnf5 install -y code-oss # or code-insiders
 # rpm-ostree install code -y
 
-git clone https://github.com/ZerBea/hcxdumptool.git
-cd hcxdumptool
-make -j $(nproc)
-make install
-make install PREFIX=/usr/local (as super user)
+#git clone https://github.com/ZerBea/hcxdumptool.git
+#cd hcxdumptool
+#make -j $(nproc)
+#make install
+#make install PREFIX=/usr/local (as super user)
 
 echo "::endgroup::"
 

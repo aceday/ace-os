@@ -68,4 +68,5 @@ if [ ${#PKGS_TO_LOCK[@]} -gt 0 ]; then
     dnf5 versionlock add "${PKGS_TO_LOCK[@]}"
 fi
 
+akmods
 echo "::endgroup::"
