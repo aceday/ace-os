@@ -69,8 +69,8 @@ PKGS_TO_INSTALL=(
     util-linux
     # scrcpy
     python3-pip
-    python3.12
-# Java
+
+    # Java
     java-21-openjdk
 
     distrobox
@@ -85,6 +85,7 @@ PKGS_TO_INSTALL=(
     hashcat
     reaver
     cowpatty
+    hcxtools
 
     # Multimedia
     shotcut
@@ -179,15 +180,18 @@ wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rp
 sudo dnf install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
 
-
-
-
 # VS Code
 #sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 # echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 # dnf check-update
-dnf5 install -y code-oss # or code-insiders
+# dnf5 install -y code-oss # or code-insiders
 # rpm-ostree install code -y
+
+git clone https://github.com/ZerBea/hcxdumptool.git
+cd hcxdumptool
+make -j $(nproc)
+make install
+make install PREFIX=/usr/local (as super user)
 
 echo "::endgroup::"
 
