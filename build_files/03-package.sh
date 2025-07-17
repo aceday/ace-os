@@ -35,6 +35,7 @@ PKGS_TO_INSTALL=(
     go
     rust
     fastfetch
+    patchelf
     mpv
     git
     gh
@@ -167,8 +168,8 @@ TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' /usr/share/ublue-tr/c
 echo $TODAYS_CHROME_VERSION > /usr/share/ublue-tr/chrome-workarounds/google-chrome-current-version
 
 echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
-dnf5 install -y /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
-rm /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
+# dnf5 install -y /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
+# rm /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
 
 # VS Code v2
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
