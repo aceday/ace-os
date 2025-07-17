@@ -68,7 +68,8 @@ if [ ${#PKGS_TO_LOCK[@]} -gt 0 ]; then
     dnf5 versionlock add "${PKGS_TO_LOCK[@]}"
 fi
 
-dnf5 install akmod-VirtualBox kernel-devel-6.15.6-200.fc42.x86_64
+dnf5 install -y kmod-VirtualBox-6.15.6-200.fc42.x86_64
+dnf5 install -y akmod-VirtualBox kernel-devel-6.15.6-200.fc42.x86_64
 mkdir -p /run/akmods/
-akmods
+akmods --force
 echo "::endgroup::"
