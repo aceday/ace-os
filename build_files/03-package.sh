@@ -92,7 +92,8 @@ PKGS_TO_INSTALL=(
     darktable
     gimp
     blender
-    
+    perl-Image-ExifTool
+
     # QEMU
     qemu-device-display-virtio-gpu
     qemu-device-display-virtio-gpu-gl
