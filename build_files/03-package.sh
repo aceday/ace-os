@@ -93,6 +93,7 @@ PKGS_TO_INSTALL=(
     gimp
     blender
     perl-Image-ExifTool
+    ImageMagick
 
     # QEMU
     qemu-device-display-virtio-gpu
