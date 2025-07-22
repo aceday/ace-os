@@ -123,6 +123,7 @@ PKGS_TO_INSTALL=(
 
     virtualbox
     tlpui
+    lutris
 )
 
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
