@@ -69,6 +69,7 @@ PKGS_TO_INSTALL=(
     util-linux
     # scrcpy
     python3-pip
+    samba
 
     # Java
     java-21-openjdk
