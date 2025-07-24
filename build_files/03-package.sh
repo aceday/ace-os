@@ -68,7 +68,11 @@ PKGS_TO_INSTALL=(
     hashcat
     util-linux
     # scrcpy
+
+    # Python
     python3-pip
+    python3-tkinter
+
     samba
 
     # Java
