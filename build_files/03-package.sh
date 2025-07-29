@@ -46,6 +46,7 @@ PKGS_TO_INSTALL=(
     aria2
     mycli
 
+    mysql
     mysql-server
     mysql-test
     mysql-common
