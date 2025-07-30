@@ -64,8 +64,8 @@ PKGS_TO_INSTALL=(
     android-tools
     fish
     #zsh
-    #zsh-autocomplete
-    #zsh-autosuggestions
+    zsh-autocomplete
+    zsh-autosuggestions
     hashcat
     util-linux
     # scrcpy
