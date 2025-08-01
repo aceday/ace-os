@@ -30,7 +30,8 @@ PKGS_TO_INSTALL=(
     fuse
     gcr3
     hexedit
-    nodejs-npm
+    nodejs20-npm
+    nodejs20
     moreutils
     go
     rust
