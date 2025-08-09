@@ -131,6 +131,10 @@ PKGS_TO_INSTALL=(
     virtualbox
     tlpui
     lutris
+
+    gutenprint
+    gutenprint-cups
+    lprint
 )
 
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
