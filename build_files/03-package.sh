@@ -128,7 +128,6 @@ PKGS_TO_INSTALL=(
     wlr-randr # Wayland output management
     xrandr
 
-    virtualbox
     tlpui
     lutris
 
@@ -188,17 +187,16 @@ echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # dnf5 install -y /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
 # rm /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
 
-# VS Code v2
+# VS Code Native
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
-sudo dnf install -y ./code-latest-x64.rpm
+sudo dnf5 install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
 
-# VS Code
-#sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-# echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-# dnf check-update
-# dnf5 install -y code-oss # or code-insiders
-# rpm-ostree install code -y
+# Virtualbox based from rpm
+wget --no-check-certificate https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+
 
 #git clone https://github.com/ZerBea/hcxdumptool.git
 #cd hcxdumptool
