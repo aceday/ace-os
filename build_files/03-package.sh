@@ -129,6 +129,8 @@ PKGS_TO_INSTALL=(
     xrandr
 
     virtualbox
+    akmod-VirtualBox
+    kernel-devel
     tlpui
     lutris
 
