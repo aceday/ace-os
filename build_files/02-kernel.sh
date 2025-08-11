@@ -23,4 +23,6 @@ dnf5 -y install \
 dnf5 -y copr disable bieszczaders/kernel-cachyos-addons
 dnf5 -y swap --repo copr:copr.fedorainfracloud.org:bazzite-org:bazzite bootc bootc 
 
+dnf5 install -y "kernel-devel-$(uname -r)"
+
 echo "::endgroup::"
