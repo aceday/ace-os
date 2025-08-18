@@ -5,7 +5,7 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 
 # Set default OS name if not provided via ARG
-OS_NAME=${OS_NAME:-ace}
+OS_NAME=${OS_NAME:-ace-os}
 DEFAULT_TAG=${DEFAULT_TAG:-latest}
 
 RELEASE="$(rpm -E %fedora)"
