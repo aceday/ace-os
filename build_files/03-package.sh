@@ -196,7 +196,7 @@ rm ./code-latest-x64.rpm
 wget --no-check-certificate https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
 sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
 rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-
+/sbin/vboxconfig
 
 #git clone https://github.com/ZerBea/hcxdumptool.git
 #cd hcxdumptool
