@@ -4,12 +4,15 @@ ARG FEDORA_VERSION=42
 ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64 
 ARG KERNEL_FLAVOR=bazzite
 ARG BASE_IMAGE_NAME=silverblue
+ARG OS_NAME=ace-os
+ARG DEFAULT_TAG=latest
 
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
+
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
@@ -89,6 +92,14 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/09-config.sh && \
+    /ctx/cleanup.sh
+
+# 10-image-base
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/10-image-base.sh && \
     /ctx/cleanup.sh
 
 ### LINTING
