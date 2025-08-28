@@ -57,6 +57,9 @@ PKGS_TO_INSTALL=(
     p7zip-plugins
     rar
 
+    clang
+    ccache
+    python3.13-devel
     ghex
     # discord
     duf
