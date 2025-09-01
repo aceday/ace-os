@@ -10,9 +10,9 @@ fi
 
 # Configure GRUB command line options
 if grep -q '^GRUB_CMDLINE_LINUX_DEFAULT=' "$grub_cfg"; then
-    sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on iommu=pt kvm.ignore_msrs=1"/' "$grub_cfg"
+    sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on iommu=pt kvm.ignore_msrs=1 intel_pstate=disable"/' "$grub_cfg"
 else
-    echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on iommu=pt kvm.ignore_msrs=1"' >> "$grub_cfg"
+    echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on iommu=pt kvm.ignore_msrs=1 intel_pstate=disable"' >> "$grub_cfg"
 fi
 
 
