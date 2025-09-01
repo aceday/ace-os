@@ -123,6 +123,10 @@ PKGS_TO_INSTALL=(
     iwd # iNet Wireless Daemon
     libcec # HDMI CEC library
     lm_sensors
+    
+    # ThinkPad specific tools
+    tpacpi-bat # ThinkPad ACPI battery control
+    thinkfan # ThinkPad fan control
 
     # Display & Graphics
     cage # Wayland compositor for single applications
