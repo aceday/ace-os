@@ -163,6 +163,8 @@ fi
 #sudo rpm --import linux_signing_key.pub
 #dnf5 update -y
 #dnf5 install -y google-chrome-stable
+wget "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+dnf localinstall ./google-chrome-stable_current_x86_64.rpm -y
 
 # Google Chrome V2
 rm -rf /opt/google/
