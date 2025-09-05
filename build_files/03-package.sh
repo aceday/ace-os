@@ -57,9 +57,6 @@ PKGS_TO_INSTALL=(
     p7zip-plugins
     rar
 
-    clang
-    ccache
-    python3.13-devel
     ghex
     # discord
     duf
@@ -123,10 +120,6 @@ PKGS_TO_INSTALL=(
     iwd # iNet Wireless Daemon
     libcec # HDMI CEC library
     lm_sensors
-    
-    # ThinkPad specific tools
-    tpacpi-bat # ThinkPad ACPI battery control
-    thinkfan # ThinkPad fan control
 
     # Display & Graphics
     cage # Wayland compositor for single applications
@@ -135,6 +128,9 @@ PKGS_TO_INSTALL=(
     wlr-randr # Wayland output management
     xrandr
 
+    virtualbox
+    akmod-VirtualBox
+    kernel-devel
     tlpui
     lutris
 
@@ -166,14 +162,7 @@ fi
 #wget https://dl.google.com/linux/linux_signing_key.pub
 #sudo rpm --import linux_signing_key.pub
 #dnf5 update -y
-#dnf5 install -y google-chrome-stable
-
-# Google Chrome V2
-rm -rf /opt/google/
-
-mkdir -p /usr/share/ublue-tr/chrome-workarounds
-mkdir -p /tmp/chrome-workarounds
-echo "Downloading Google Signing Key"
+#dnf5 install -y google-chroading Google Signing Key"
 curl https://dl.google.com/linux/linux_signing_key.pub > /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
 
 rpm --import /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
@@ -194,16 +183,17 @@ echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # dnf5 install -y /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
 # rm /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
 
-# VS Code Native
+# VS Code v2
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
-sudo dnf5 install -y ./code-latest-x64.rpm
+sudo dnf install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
 
-# Virtualbox based from rpm
-wget --no-check-certificate https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-/sbin/vboxconfig
+# VS Code
+#sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+# echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+# dnf check-update
+# dnf5 install -y code-oss # or code-insiders
+# rpm-ostree install code -y
 
 #git clone https://github.com/ZerBea/hcxdumptool.git
 #cd hcxdumptool

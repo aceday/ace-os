@@ -1,0 +1,17 @@
+# Compiz win effect
+https://extensions.gnome.org/extension/1234/compiz-win-effect/
+
+# Clipboard indicator
+https://extensions.gnome.org/extension/779/clipboard-indicator/
+
+# AppIndicator support and KStatusNotifierItem support
+https://extensions.gnome.org/extension/615/appindicator-support/
+
+# Dash to Panel
+https://extensions.gnome.org/extension/1160/dash-to-panel/
+
+# Splash indicator
+https://extensions.gnome.org/extension/495/splash-indicator/
+
+# System Monitor
+https://extensions.gnome.org/extension/6807/system-monitor/

@@ -75,5 +75,31 @@ usermod -a -G libvirt mac
 modprobe kvm
 modprobe kvm_intel  # Use kvm_amd for AMD processors
 
+## System-wide GNOME extensions installation
+# The file `build_files/gnome-extensions.txt` contains one extension UUID per line.
+# Lines starting with '#' or empty lines are ignored.
+ext_list="$(dirname "$0")/gnome-extensions.txt"
+if [ -f "$ext_list" ]; then
+    echo "Installing system-wide GNOME extensions listed in $ext_list"
+    while IFS= read -r line || [ -n "$line" ]; do
+        # strip leading/trailing whitespace
+        uuid="$(echo "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+        # skip comments and empty lines
+        case "$uuid" in
+            ''|\#*) continue ;;
+        esac
+
+        echo "Installing extension: $uuid"
+        # run installer script; use FORCE_GNOME_EXT=1 to force patching compatibility
+        if [ "${FORCE_GNOME_EXT:-0}" = "1" ]; then
+            /bin/bash "$(dirname "$0")/install-gnome-extension.sh" "$uuid" force || echo "Failed to install $uuid"
+        else
+            /bin/bash "$(dirname "$0")/install-gnome-extension.sh" "$uuid" || echo "Failed to install $uuid"
+        fi
+    done < "$ext_list"
+else
+    echo "No GNOME extensions list found at $ext_list; skipping system-wide extension install"
+fi
+
 # Test kernel print
 echo "Kernel version: $(uname -r)"
