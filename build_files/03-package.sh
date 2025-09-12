@@ -25,6 +25,7 @@ PKGS_TO_INSTALL=(
     libvirt
     virt-manager
     obs-studio
+    pulseaudio-libs-devel
     tlp
     tlp-rdw
     fuse
