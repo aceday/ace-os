@@ -26,8 +26,9 @@ PKGS_TO_INSTALL=(
     virt-manager
     obs-studio
     pulseaudio-libs-devel
-    tlp
-    tlp-rdw
+    #tlp
+    #tlp-rdw
+    powertop
     fuse
     gcr3
     hexedit
