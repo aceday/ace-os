@@ -166,31 +166,56 @@ fi
 #dnf5 update -y
 #dnf5 install -y google-chrome-stable
 
+rpm --import /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
+echo "collecting information on where rpm put the key for future reference"
+echo "Downloading Google Chrome"
+echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # Google Chrome V2
-rm -rf /opt/google/
+# Ensure we have a clean area
+rm -rf /opt/google/ || true
 
 mkdir -p /usr/share/ublue-tr/chrome-workarounds
 mkdir -p /tmp/chrome-workarounds
+CHROME_DIR=/usr/share/ublue-tr/chrome-workarounds
+CHROME_RPM="$CHROME_DIR/google-chrome-stable_current_x86_64.rpm"
+CHROME_KEY="$CHROME_DIR/linux_signing_key.pub"
+
 echo "Downloading Google Signing Key"
-curl https://dl.google.com/linux/linux_signing_key.pub > /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
+curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub
 
-rpm --import /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
+echo "Importing Google signing key into rpm keyring"
+# import; if already present this will typically return non-zero — let rpm show useful info
+if ! rpm --import "$CHROME_KEY"; then
+    echo "Warning: rpm --import returned non-zero. Continuing so we can show rpm -K output for diagnosis."
+fi
 
-echo "collecting information on where rpm put the key for future reference"
-ls -l /etc/pki/rpm-gpg | grep -v fedora | grep -v rpmfusion 
-rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} %{PACKAGER}\n' | grep 'linux-packages-keymaster@google.com'
+echo "Collecting information on where rpm put the key for future reference"
+ls -l /etc/pki/rpm-gpg | grep -v fedora | grep -v rpmfusion || true
+rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} %{PACKAGER}\n' | grep -i 'google' || true
 
-echo "Downloading Google Chrome"
-curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm > /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
-echo "Verifying Google Chrome"
-rpm -K /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
+echo "Downloading Google Chrome RPM"
+curl -fSLo "$CHROME_RPM" https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
+echo "Verifying Google Chrome RPM signature"
+# rpm -K returns 0 on success; capture output for better diagnostics
+if ! rpm -K "$CHROME_RPM"; then
+    echo "ERROR: RPM verification failed for $CHROME_RPM"
+    echo "Showing rpm -Kv output for diagnosis:"
+    rpm -Kv "$CHROME_RPM" || true
+    echo "If the signature check fails, ensure the Google key imported successfully."
+    # Do not attempt to install an unverified package; exit with non-zero to surface failure
+    exit 1
+fi
+
 # Save so we can verify the version later
-TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm)
-echo $TODAYS_CHROME_VERSION > /usr/share/ublue-tr/chrome-workarounds/google-chrome-current-version
+TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' "$CHROME_RPM") || true
+echo "$TODAYS_CHROME_VERSION" > "$CHROME_DIR/google-chrome-current-version"
 
 echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
-# dnf5 install -y /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
-# rm /usr/share/ublue-tr/chrome-workarounds/google-chrome-stable_current_x86_64.rpm
+echo "Installing Google Chrome via dnf5"
+# Use dnf5 to handle dependencies (requires root)
+dnf5 install -y "$CHROME_RPM"
+rm -f "$CHROME_RPM"
 
 # VS Code Native
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
