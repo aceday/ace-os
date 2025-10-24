@@ -228,12 +228,6 @@ sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
 rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
 /sbin/vboxconfig
 
-# Install winboat(beta)
-wget https://release-assets.githubusercontent.com/github-production-release-asset/960420129/5a1a5b9c-a404-4a21-81b3-93bb4cc0bcab?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-10-24T14%3A27%3A31Z&rscd=attachment%3B+filename%3Dwinboat-0.8.7-x86_64.rpm&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-10-24T13%3A27%3A16Z&ske=2025-10-24T14%3A27%3A31Z&sks=b&skv=2018-11-09&sig=Wpc9xLHcBMwjxhWqm%2BZCUUQ4g6QWZMIlucxDQ66XdN0%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2MTMxNDM0OCwibmJmIjoxNzYxMzEyNTQ4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.VFsrWyWwgQ_NUCCc4NcnKxM_G8GRruA-7uJZlDdxbA4&response-content-disposition=attachment%3B%20filename%3Dwinboat-0.8.7-x86_64.rpm&response-content-type=application%2Foctet-stream
-sudo dnf5 install -y ./winboat-0.8.7-x86_64.rpm
-rm ./winboat-0.8.7-x86_64.rpm
-
-
 #git clone https://github.com/ZerBea/hcxdumptool.git
 #cd hcxdumptool
 #make -j $(nproc)
