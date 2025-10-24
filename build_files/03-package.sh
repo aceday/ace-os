@@ -7,6 +7,87 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 shopt -s nullglob
 
+# --- Handle optfix entries (packages that install into /opt) ---
+# This will look for an 'optfix' array in a YAML recipe provided as $1 and
+# create safe symlinks so packages that expect /opt/<pkg> work in the image.
+# It is intentionally dependency-free: if a helper `get_yaml_array` exists we
+# use it; otherwise we fall back to a small YAML-ish parser that handles a
+# simple list of the form:
+# optfix:
+#   - google
+#   - somepkg
+
+# recipe path may be provided as first argument to this script
+RECIPE_PATH="${1:-}"
+OPTFIX=()
+
+if declare -f get_yaml_array >/dev/null 2>&1; then
+    # existing helper available in the environment
+    get_yaml_array OPTFIX '.optfix[]' "$RECIPE_PATH"
+else
+    # fallback: simple parser for a YAML list under 'optfix:'
+    if [ -n "$RECIPE_PATH" ] && [ -f "$RECIPE_PATH" ]; then
+        mapfile -t OPTFIX < <(
+            awk '
+                /^optfix:[[:space:]]*$/ { inblock=1; next }
+                inblock && /^[[:space:]]*-/ {
+                    sub(/^[[:space:]]*-[[:space:]]*/, "");
+                    gsub(/^[[:space:]]+|[[:space:]]+$/,"");
+                    print
+                    next
+                }
+                inblock && /^[^[:space:]]/ { exit }
+            ' "$RECIPE_PATH"
+        )
+    fi
+fi
+
+if [ ${#OPTFIX[@]} -gt 0 ]; then
+    echo "Creating symlinks to fix packages that install to /opt"
+
+    # require root for top-level changes
+    if [ "$(id -u)" -ne 0 ]; then
+        echo "This operation requires root. Please run as root." >&2
+        exit 1
+    fi
+
+    # Prepare /var/opt and only create a /opt -> /var/opt symlink if /opt
+    # does not already exist (avoid clobbering a real /opt directory).
+    mkdir -p "/var/opt"
+    if [ ! -e "/opt" ]; then
+        ln -s "/var/opt" "/opt"
+        echo "Created symlink /opt -> /var/opt"
+    elif [ -L "/opt" ]; then
+        echo "/opt already a symlink; leaving as-is"
+    else
+        echo "/opt exists and is not a symlink; skipping global /opt -> /var/opt creation"
+    fi
+
+    for OPTPKG in "${OPTFIX[@]}"; do
+        # sanitize and normalize
+        OPTPKG=$(printf '%s' "$OPTPKG" | sed -e 's/^"//' -e 's/"$//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+        # validate simple package name
+        if ! printf '%s' "$OPTPKG" | grep -Eq '^[A-Za-z0-9._-]+$'; then
+            echo "Skipping suspicious package name: '$OPTPKG'" >&2
+            continue
+        fi
+
+        mkdir -p "/usr/lib/opt/$OPTPKG"
+
+        if [ -e "/var/opt/$OPTPKG" ] && [ ! -L "/var/opt/$OPTPKG" ]; then
+            backup="/var/opt/${OPTPKG}.backup.$(date +%s)"
+            mv -v "/var/opt/$OPTPKG" "$backup"
+            echo "Backed up existing /var/opt/$OPTPKG -> $backup"
+        fi
+
+        # create or replace symlink
+        ln -sfn "/usr/lib/opt/$OPTPKG" "/var/opt/$OPTPKG"
+        echo "Ensured symlink: /var/opt/$OPTPKG -> /usr/lib/opt/$OPTPKG"
+    done
+fi
+
+
 
 # PKGS_TO_UNINSTALL=(
 #     vlc-plugins-freeworld
