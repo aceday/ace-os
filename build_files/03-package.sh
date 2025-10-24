@@ -61,19 +61,23 @@ if [ ${#OPTFIX[@]} -gt 0 ]; then
             continue
         fi
 
-        # Ensure the canonical location exists
+        # Ensure the canonical location exists. Do NOT create a symlink under
+        # /var/opt yet — creating /var/opt/<pkg> as a symlink before package
+        # install will cause RPM unpack to fail (mkdir on existing symlink).
         mkdir -p "/usr/lib/opt/$OPTPKG"
 
-        # If /var/opt/<pkg> exists and is a non-symlink dir/file, back it up (timestamp)
-        if [ -e "/var/opt/$OPTPKG" ] && [ ! -L "/var/opt/$OPTPKG" ]; then
+        # If /var/opt/<pkg> is a symlink, remove it so RPM can create the
+        # directory during unpack. If it's a non-directory file, back it up.
+        if [ -L "/var/opt/$OPTPKG" ]; then
+            echo "/var/opt/$OPTPKG is a symlink; removing to allow package to create directory"
+            rm -vf "/var/opt/$OPTPKG"
+        elif [ -e "/var/opt/$OPTPKG" ] && [ ! -d "/var/opt/$OPTPKG" ]; then
             backup="/var/opt/${OPTPKG}.backup.$(date +%s)"
             mv -v "/var/opt/$OPTPKG" "$backup"
             echo "Backed up existing /var/opt/$OPTPKG -> $backup"
         fi
 
-        # Create/replace the symlink. Use absolute target for clarity.
-        ln -sfn "/usr/lib/opt/$OPTPKG" "/var/opt/$OPTPKG"
-        echo "Ensured symlink: /var/opt/$OPTPKG -> /usr/lib/opt/$OPTPKG"
+        echo "Prepared /usr/lib/opt/$OPTPKG (no symlink placed under /var/opt to avoid RPM unpack conflicts)"
     done
 fi
 
