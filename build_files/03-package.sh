@@ -8,20 +8,72 @@ set -ouex pipefail
 shopt -s nullglob
 
 
-get_yaml_array OPTFIX '.optfix[]' "$1"
-if [[ ${#OPTFIX[@]} -gt 0 ]]; then
+# --- Handle optfix entries (packages that install into /opt) ---
+# Read optfix list from a recipe file if provided as $1. Be tolerant when
+# invoked without args (we run with set -u) and when helper functions are
+# not available in the build environment.
+RECIPE_PATH="${1:-}"
+OPTFIX=()
+
+if declare -f get_yaml_array >/dev/null 2>&1; then
+    # Use existing helper if present (keeps compatibility with the rest of the build)
+    get_yaml_array OPTFIX '.optfix[]' "$RECIPE_PATH"
+else
+    # Fallback: a tiny parser that extracts items under an 'optfix:' YAML list
+    if [ -n "$RECIPE_PATH" ] && [ -f "$RECIPE_PATH" ]; then
+        mapfile -t OPTFIX < <(
+            awk '
+                /^optfix:[[:space:]]*$/ { inblock=1; next }
+                inblock && /^[[:space:]]*-/ {
+                    sub(/^[[:space:]]*-[[:space:]]*/, "");
+                    gsub(/^[[:space:]]+|[[:space:]]+$/,"");
+                    print
+                    next
+                }
+                inblock && /^[^[:space:]]/ { exit }
+            ' "$RECIPE_PATH"
+        )
+    fi
+fi
+
+if [ ${#OPTFIX[@]} -gt 0 ]; then
     echo "Creating symlinks to fix packages that install to /opt"
-    # Create symlink for /opt to /var/opt since it is not created in the image yet
+
+    # Prepare /var/opt and only create a /opt -> /var/opt symlink if /opt
+    # does not already exist (avoid clobbering a real /opt directory).
     mkdir -p "/var/opt"
-    ln -s "/var/opt"  "/opt"
-    # Create symlinks for each directory specified in recipe.yml
+    if [ ! -e "/opt" ]; then
+        ln -s "/var/opt" "/opt"
+        echo "Created symlink /opt -> /var/opt"
+    elif [ -L "/opt" ]; then
+        echo "/opt already a symlink; leaving as-is"
+    else
+        echo "/opt exists and is not a symlink; skipping global /opt -> /var/opt creation"
+    fi
+
     for OPTPKG in "${OPTFIX[@]}"; do
-        OPTPKG="${OPTPKG%\"}"
-        OPTPKG="${OPTPKG#\"}"
-        OPTPKG=$(printf "$OPTPKG")
-        mkdir -p "/usr/lib/opt/${OPTPKG}"
-        ln -s "../../usr/lib/opt/${OPTPKG}" "/var/opt/${OPTPKG}"
-        echo "Created symlinks for ${OPTPKG}"
+        # sanitize and normalize the name (strip surrounding quotes/whitespace)
+        OPTPKG=$(printf '%s' "$OPTPKG" | sed -e 's/^"//' -e 's/"$//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+        # Basic name validation — allow letters, numbers, dot, underscore, dash
+        if ! printf '%s' "$OPTPKG" | grep -Eq '^[A-Za-z0-9._-]+$'; then
+            echo "Skipping suspicious package name: '$OPTPKG'" >&2
+            continue
+        fi
+
+        # Ensure the canonical location exists
+        mkdir -p "/usr/lib/opt/$OPTPKG"
+
+        # If /var/opt/<pkg> exists and is a non-symlink dir/file, back it up (timestamp)
+        if [ -e "/var/opt/$OPTPKG" ] && [ ! -L "/var/opt/$OPTPKG" ]; then
+            backup="/var/opt/${OPTPKG}.backup.$(date +%s)"
+            mv -v "/var/opt/$OPTPKG" "$backup"
+            echo "Backed up existing /var/opt/$OPTPKG -> $backup"
+        fi
+
+        # Create/replace the symlink. Use absolute target for clarity.
+        ln -sfn "/usr/lib/opt/$OPTPKG" "/var/opt/$OPTPKG"
+        echo "Ensured symlink: /var/opt/$OPTPKG -> /usr/lib/opt/$OPTPKG"
     done
 fi
 
