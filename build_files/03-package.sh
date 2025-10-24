@@ -165,11 +165,6 @@ fi
 #sudo rpm --import linux_signing_key.pub
 #dnf5 update -y
 #dnf5 install -y google-chrome-stable
-
-rpm --import /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
-echo "collecting information on where rpm put the key for future reference"
-echo "Downloading Google Chrome"
-echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # Google Chrome V2
 # Ensure we have a clean area
 rm -rf /opt/google/ || true
@@ -181,12 +176,36 @@ CHROME_RPM="$CHROME_DIR/google-chrome-stable_current_x86_64.rpm"
 CHROME_KEY="$CHROME_DIR/linux_signing_key.pub"
 
 echo "Downloading Google Signing Key"
-curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub
+curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub || true
+
+# Verify the key file exists and is non-empty; retry with wget if curl failed or produced an empty file
+if [ ! -s "$CHROME_KEY" ]; then
+    echo "Key file $CHROME_KEY is missing or empty; attempting retry with wget..."
+    if command -v wget >/dev/null 2>&1; then
+        if ! wget -qO "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub; then
+            echo "Failed to download Google signing key with wget."
+        fi
+    else
+        echo "wget not available in PATH to retry download."
+    fi
+fi
+
+if [ ! -s "$CHROME_KEY" ]; then
+    echo "ERROR: Google signing key not found at $CHROME_KEY after retries."
+    ls -l "$CHROME_DIR" || true
+    echo "Aborting to avoid importing a missing key."
+    exit 1
+fi
 
 echo "Importing Google signing key into rpm keyring"
-# import; if already present this will typically return non-zero — let rpm show useful info
+# import; if already present this will typically return non-zero — show diagnostic and fail early on true import errors
 if ! rpm --import "$CHROME_KEY"; then
-    echo "Warning: rpm --import returned non-zero. Continuing so we can show rpm -K output for diagnosis."
+    echo "ERROR: rpm --import failed for $CHROME_KEY"
+    echo "Showing file information for diagnosis:"
+    ls -l "$CHROME_KEY" || true
+    echo "File head (first 20 lines):"
+    head -n 20 "$CHROME_KEY" || true
+    exit 1
 fi
 
 echo "Collecting information on where rpm put the key for future reference"
