@@ -8,6 +8,81 @@ set -ouex pipefail
 shopt -s nullglob
 
 
+# --- Handle optfix entries (packages that install into /opt) ---
+# Read optfix list from a recipe file if provided as $1. Be tolerant when
+# invoked without args (we run with set -u) and when helper functions are
+# not available in the build environment.
+RECIPE_PATH="${1:-}"
+OPTFIX=()
+
+if declare -f get_yaml_array >/dev/null 2>&1; then
+    # Use existing helper if present (keeps compatibility with the rest of the build)
+    get_yaml_array OPTFIX '.optfix[]' "$RECIPE_PATH"
+else
+    # Fallback: a tiny parser that extracts items under an 'optfix:' YAML list
+    if [ -n "$RECIPE_PATH" ] && [ -f "$RECIPE_PATH" ]; then
+        mapfile -t OPTFIX < <(
+            awk '
+                /^optfix:[[:space:]]*$/ { inblock=1; next }
+                inblock && /^[[:space:]]*-/ {
+                    sub(/^[[:space:]]*-[[:space:]]*/, "");
+                    gsub(/^[[:space:]]+|[[:space:]]+$/,"");
+                    print
+                    next
+                }
+                inblock && /^[^[:space:]]/ { exit }
+            ' "$RECIPE_PATH"
+        )
+    fi
+fi
+
+if [ ${#OPTFIX[@]} -gt 0 ]; then
+    echo "Creating symlinks to fix packages that install to /opt"
+
+    # Prepare /var/opt and only create a /opt -> /var/opt symlink if /opt
+    # does not already exist (avoid clobbering a real /opt directory).
+    mkdir -p "/var/opt"
+    if [ ! -e "/opt" ]; then
+        ln -s "/var/opt" "/opt"
+        echo "Created symlink /opt -> /var/opt"
+    elif [ -L "/opt" ]; then
+        echo "/opt already a symlink; leaving as-is"
+    else
+        echo "/opt exists and is not a symlink; skipping global /opt -> /var/opt creation"
+    fi
+
+    for OPTPKG in "${OPTFIX[@]}"; do
+        # sanitize and normalize the name (strip surrounding quotes/whitespace)
+        OPTPKG=$(printf '%s' "$OPTPKG" | sed -e 's/^"//' -e 's/"$//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+        # Basic name validation — allow letters, numbers, dot, underscore, dash
+        if ! printf '%s' "$OPTPKG" | grep -Eq '^[A-Za-z0-9._-]+$'; then
+            echo "Skipping suspicious package name: '$OPTPKG'" >&2
+            continue
+        fi
+
+        # Ensure the canonical location exists. Do NOT create a symlink under
+        # /var/opt yet — creating /var/opt/<pkg> as a symlink before package
+        # install will cause RPM unpack to fail (mkdir on existing symlink).
+        mkdir -p "/usr/lib/opt/$OPTPKG"
+
+        # If /var/opt/<pkg> is a symlink, remove it so RPM can create the
+        # directory during unpack. If it's a non-directory file, back it up.
+        if [ -L "/var/opt/$OPTPKG" ]; then
+            echo "/var/opt/$OPTPKG is a symlink; removing to allow package to create directory"
+            rm -vf "/var/opt/$OPTPKG"
+        elif [ -e "/var/opt/$OPTPKG" ] && [ ! -d "/var/opt/$OPTPKG" ]; then
+            backup="/var/opt/${OPTPKG}.backup.$(date +%s)"
+            mv -v "/var/opt/$OPTPKG" "$backup"
+            echo "Backed up existing /var/opt/$OPTPKG -> $backup"
+        fi
+
+        echo "Prepared /usr/lib/opt/$OPTPKG (no symlink placed under /var/opt to avoid RPM unpack conflicts)"
+    done
+fi
+
+
+
 # PKGS_TO_UNINSTALL=(
 #     vlc-plugins-freeworld
 # )
@@ -165,11 +240,6 @@ fi
 #sudo rpm --import linux_signing_key.pub
 #dnf5 update -y
 #dnf5 install -y google-chrome-stable
-
-rpm --import /usr/share/ublue-tr/chrome-workarounds/linux_signing_key.pub
-echo "collecting information on where rpm put the key for future reference"
-echo "Downloading Google Chrome"
-echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
 # Google Chrome V2
 # Ensure we have a clean area
 rm -rf /opt/google/ || true
@@ -181,12 +251,36 @@ CHROME_RPM="$CHROME_DIR/google-chrome-stable_current_x86_64.rpm"
 CHROME_KEY="$CHROME_DIR/linux_signing_key.pub"
 
 echo "Downloading Google Signing Key"
-curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub
+curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub || true
+
+# Verify the key file exists and is non-empty; retry with wget if curl failed or produced an empty file
+if [ ! -s "$CHROME_KEY" ]; then
+    echo "Key file $CHROME_KEY is missing or empty; attempting retry with wget..."
+    if command -v wget >/dev/null 2>&1; then
+        if ! wget -qO "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub; then
+            echo "Failed to download Google signing key with wget."
+        fi
+    else
+        echo "wget not available in PATH to retry download."
+    fi
+fi
+
+if [ ! -s "$CHROME_KEY" ]; then
+    echo "ERROR: Google signing key not found at $CHROME_KEY after retries."
+    ls -l "$CHROME_DIR" || true
+    echo "Aborting to avoid importing a missing key."
+    exit 1
+fi
 
 echo "Importing Google signing key into rpm keyring"
-# import; if already present this will typically return non-zero — let rpm show useful info
+# import; if already present this will typically return non-zero — show diagnostic and fail early on true import errors
 if ! rpm --import "$CHROME_KEY"; then
-    echo "Warning: rpm --import returned non-zero. Continuing so we can show rpm -K output for diagnosis."
+    echo "ERROR: rpm --import failed for $CHROME_KEY"
+    echo "Showing file information for diagnosis:"
+    ls -l "$CHROME_KEY" || true
+    echo "File head (first 20 lines):"
+    head -n 20 "$CHROME_KEY" || true
+    exit 1
 fi
 
 echo "Collecting information on where rpm put the key for future reference"
