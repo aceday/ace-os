@@ -242,74 +242,74 @@ fi
 #dnf5 install -y google-chrome-stable
 # Google Chrome V2
 # Ensure we have a clean area
-rm -rf /opt/google/ || true
+# rm -rf /opt/google/ || true
 
-mkdir -p /usr/share/ublue-tr/chrome-workarounds
-mkdir -p /tmp/chrome-workarounds
-CHROME_DIR=/usr/share/ublue-tr/chrome-workarounds
-CHROME_RPM="$CHROME_DIR/google-chrome-stable_current_x86_64.rpm"
-CHROME_KEY="$CHROME_DIR/linux_signing_key.pub"
+# mkdir -p /usr/share/ublue-tr/chrome-workarounds
+# mkdir -p /tmp/chrome-workarounds
+#CHROME_DIR=/usr/share/ublue-tr/chrome-workarounds
+#CHROME_RPM="$CHROME_DIR/google-chrome-stable_current_x86_64.rpm"
+#CHROME_KEY="$CHROME_DIR/linux_signing_key.pub"
 
-echo "Downloading Google Signing Key"
-curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub || true
+# echo "Downloading Google Signing Key"
+# curl -fSLo "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub || true
 
 # Verify the key file exists and is non-empty; retry with wget if curl failed or produced an empty file
-if [ ! -s "$CHROME_KEY" ]; then
-    echo "Key file $CHROME_KEY is missing or empty; attempting retry with wget..."
-    if command -v wget >/dev/null 2>&1; then
-        if ! wget -qO "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub; then
-            echo "Failed to download Google signing key with wget."
-        fi
-    else
-        echo "wget not available in PATH to retry download."
-    fi
-fi
+# if [ ! -s "$CHROME_KEY" ]; then
+#    echo "Key file $CHROME_KEY is missing or empty; attempting retry with wget..."
+#    if command -v wget >/dev/null 2>&1; then
+#        if ! wget -qO "$CHROME_KEY" https://dl.google.com/linux/linux_signing_key.pub; then
+#            echo "Failed to download Google signing key with wget."
+#        fi
+#    else
+#        echo "wget not available in PATH to retry download."
+#    fi
+#fi
+#
+#if [ ! -s "$CHROME_KEY" ]; then
+#    echo "ERROR: Google signing key not found at $CHROME_KEY after retries."
+#    ls -l "$CHROME_DIR" || true
+#    echo "Aborting to avoid importing a missing key."
+#    exit 1
+#fi
 
-if [ ! -s "$CHROME_KEY" ]; then
-    echo "ERROR: Google signing key not found at $CHROME_KEY after retries."
-    ls -l "$CHROME_DIR" || true
-    echo "Aborting to avoid importing a missing key."
-    exit 1
-fi
+#echo "Importing Google signing key into rpm keyring"
+## import; if already present this will typically return non-zero — show diagnostic and fail early on true import errors
+#if ! rpm --import "$CHROME_KEY"; then
+#    echo "ERROR: rpm --import failed for $CHROME_KEY"
+#    echo "Showing file information for diagnosis:"
+#    ls -l "$CHROME_KEY" || true
+#    echo "File head (first 20 lines):"
+#    head -n 20 "$CHROME_KEY" || true
+#    exit 1
+#fi
 
-echo "Importing Google signing key into rpm keyring"
-# import; if already present this will typically return non-zero — show diagnostic and fail early on true import errors
-if ! rpm --import "$CHROME_KEY"; then
-    echo "ERROR: rpm --import failed for $CHROME_KEY"
-    echo "Showing file information for diagnosis:"
-    ls -l "$CHROME_KEY" || true
-    echo "File head (first 20 lines):"
-    head -n 20 "$CHROME_KEY" || true
-    exit 1
-fi
+# echo "Collecting information on where rpm put the key for future reference"
+# ls -l /etc/pki/rpm-gpg | grep -v fedora | grep -v rpmfusion || true
+#rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} %{PACKAGER}\n' | grep -i 'google' || true
 
-echo "Collecting information on where rpm put the key for future reference"
-ls -l /etc/pki/rpm-gpg | grep -v fedora | grep -v rpmfusion || true
-rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} %{PACKAGER}\n' | grep -i 'google' || true
+# echo "Downloading Google Chrome RPM"
+# curl -fSLo "$CHROME_RPM" https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 
-echo "Downloading Google Chrome RPM"
-curl -fSLo "$CHROME_RPM" https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-
-echo "Verifying Google Chrome RPM signature"
+# echo "Verifying Google Chrome RPM signature"
 # rpm -K returns 0 on success; capture output for better diagnostics
-if ! rpm -K "$CHROME_RPM"; then
-    echo "ERROR: RPM verification failed for $CHROME_RPM"
-    echo "Showing rpm -Kv output for diagnosis:"
-    rpm -Kv "$CHROME_RPM" || true
-    echo "If the signature check fails, ensure the Google key imported successfully."
-    # Do not attempt to install an unverified package; exit with non-zero to surface failure
-    exit 1
+# if ! rpm -K "$CHROME_RPM"; then
+#    echo "ERROR: RPM verification failed for $CHROME_RPM"
+#    echo "Showing rpm -Kv output for diagnosis:"
+#    rpm -Kv "$CHROME_RPM" || true
+#    echo "If the signature check fails, ensure the Google key imported successfully."
+#    # Do not attempt to install an unverified package; exit with non-zero to surface failure
+#    exit 1
 fi
 
 # Save so we can verify the version later
-TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' "$CHROME_RPM") || true
-echo "$TODAYS_CHROME_VERSION" > "$CHROME_DIR/google-chrome-current-version"
+#TODAYS_CHROME_VERSION=$(rpm -qp --queryformat '%{VERSION}' "$CHROME_RPM") || true
+#echo "$TODAYS_CHROME_VERSION" > "$CHROME_DIR/google-chrome-current-version"
 
-echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
-echo "Installing Google Chrome via dnf5"
-# Use dnf5 to handle dependencies (requires root)
-dnf5 install -y "$CHROME_RPM"
-rm -f "$CHROME_RPM"
+#echo "Verified Google Chrome RPM containing $TODAYS_CHROME_VERSION"
+#echo "Installing Google Chrome via dnf5"
+## Use dnf5 to handle dependencies (requires root)
+#dnf5 install -y "$CHROME_RPM"
+#rm -f "$CHROME_RPM"
 
 # VS Code Native
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
