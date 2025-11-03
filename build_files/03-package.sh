@@ -80,6 +80,7 @@ PKGS_TO_INSTALL=(
     python3-tkinter
 
     samba
+    php
 
     # Java
     java-21-openjdk
