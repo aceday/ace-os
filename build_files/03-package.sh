@@ -26,8 +26,6 @@ PKGS_TO_INSTALL=(
     virt-manager
     obs-studio
     pulseaudio-libs-devel
-    #tlp
-    #tlp-rdw
     powertop
     fuse
     gcr3
@@ -112,7 +110,6 @@ PKGS_TO_INSTALL=(
     qemu-device-display-virtio-gpu-gl
 
     # File System & Storage
-    btrfs-assistant # BTRFS GUI tool
     duperemove
     f3 # Flash memory tester
     lzip
@@ -134,13 +131,17 @@ PKGS_TO_INSTALL=(
     wlr-randr # Wayland output management
     xrandr
 
-    tlpui
     lutris
 
     gutenprint
     gutenprint-cups
     lprint
 )
+
+    # btrfs-assistant # BTRFS GUI tool
+    #tlp
+    #tlp-rdw
+    # tlpui
 
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
@@ -199,10 +200,10 @@ sudo dnf5 install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
 
 # Virtualbox based from rpm
-wget --no-check-certificate https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
-/sbin/vboxconfig
+# wget --no-check-certificate https://download.virtualbox.org/virtualbox/7.1.12/VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+# sudo dnf5 install -y ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+# rm ./VirtualBox-7.1-7.1.12_169651_fedora40-1.x86_64.rpm
+# /sbin/vboxconfig
 
 #git clone https://github.com/ZerBea/hcxdumptool.git
 #cd hcxdumptool
