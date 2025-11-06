@@ -61,35 +61,30 @@ PKGS_TO_INSTALL=(
     ccache
     python3.13-devel
     ghex
-    # discord
+
     duf
     ncdu
     android-tools
     fish
-    #zsh
+
     zsh-autocomplete
     zsh-autosuggestions
     hashcat
     util-linux
-    # scrcpy
 
-    # Python
     python3-pip
     python3-tkinter
 
     samba
     php
 
-    # Java
     java-21-openjdk
 
     distrobox
     podman
     wine
     wine-mono
-    # wine-gecko
 
-    # Pen
     wireshark
     aircrack-ng
     hashcat
@@ -97,7 +92,6 @@ PKGS_TO_INSTALL=(
     cowpatty
     hcxtools
 
-    # Multimedia
     shotcut
     darktable
     gimp
@@ -105,19 +99,17 @@ PKGS_TO_INSTALL=(
     perl-Image-ExifTool
     ImageMagick
 
-    # QEMU
     qemu-device-display-virtio-gpu
     qemu-device-display-virtio-gpu-gl
 
-    # File System & Storage
     duperemove
-    f3 # Flash memory tester
+    f3
     lzip
-    snapper # BTRFS snapshot management   
+    snapper    
     picocom
 
     # Hardware & Drivers
-    ddcutil # DDC/CI control for monitors
+    ddcutil
     i2c-tools
     input-remapper
     iwd # iNet Wireless Daemon
