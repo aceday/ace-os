@@ -151,14 +151,11 @@ if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
 fi
 
 # Google Chrome
-# rm -rf /opt/google/
-# wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/chrome.rpm
-# rpm-ostree install -y /tmp/chrome.rpm
-# rm -f /tmp/chrome.rpm
-#wget https://dl.google.com/linux/linux_signing_key.pub
-#sudo rpm --import linux_signing_key.pub
-#dnf5 update -y
-#dnf5 install -y google-chrome-stable
+# Ensure a stale installation directory doesn't block the new package
+sudo rm -rf /opt/google/
+wget --no-check-certificate https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/chrome.rpm
+sudo dnf5 install -y /tmp/chrome.rpm
+rm -f /tmp/chrome.rpm
 
 # # Google Chrome V2
 # rm -rf /opt/google/
@@ -204,4 +201,3 @@ rm ./code-latest-x64.rpm
 #make install PREFIX=/usr/local (as super user)
 
 echo "::endgroup::"
-
