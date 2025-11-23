@@ -129,32 +129,21 @@ if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
 fi
 
-sh build_files/99-cleanup.sh
-
 # VLC
 dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
-
-sh build_files/99-cleanup.sh
-
 
 PKGS_TO_UNINSTALL=(
     nvtop
 )
 
-
 if [ ${#PKGS_TO_UNINSTALL[@]} -gt 0 ]; then
     dnf5 remove -y "${PKGS_TO_UNINSTALL[@]}"
 fi
-
-sh build_files/99-cleanup.sh
 
 # VS Code Native
 wget --no-check-certificate https://update.code.visualstudio.com/latest/linux-rpm-x64/stable -O code-latest-x64.rpm
 sudo dnf5 install -y ./code-latest-x64.rpm
 rm ./code-latest-x64.rpm
-
-sh build_files/99-cleanup.sh
-
 
 echo "::endgroup::"
 
