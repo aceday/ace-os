@@ -9,9 +9,9 @@ declare -A PKGS_TO_SWAP=(
     ["copr:copr.fedorainfracloud.org:bazzite-org:bazzite"]="wireplumber"
     ["copr:copr.fedorainfracloud.org:bazzite-org:bazzite-multilib"]="pipewire bluez xorg-x11-server-Xwayland mutter"
     ["terra-extras"]="switcheroo-control gnome-shell"
-    ["terra-mesa"]="mesa-filesystem"
     ["copr:copr.fedorainfracloud.org:ublue-os:staging"]="fwupd"
 )
+#    ["terra-mesa"]="mesa-filesystem"
 
 # Swap packages from the specified repositories
 for repo in "${!PKGS_TO_SWAP[@]}"; do
