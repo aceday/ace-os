@@ -41,7 +41,6 @@ PKGS_TO_INSTALL=(
     gh
     ffmpeg
     darktable
-    torbrowser-launcher
     libreoffice
     aria2
     mycli
@@ -93,7 +92,6 @@ PKGS_TO_INSTALL=(
 
     shotcut
     darktable
-    gimp
     blender
     perl-Image-ExifTool
     ImageMagick
