@@ -82,7 +82,7 @@ PKGS_TO_INSTALL=(
     podman
     wine
     wine-mono
-
+    winetricks
     wireshark
     aircrack-ng
     hashcat
