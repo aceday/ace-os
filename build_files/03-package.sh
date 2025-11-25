@@ -130,7 +130,8 @@ if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
 fi
 
 # VLC
-dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
+# dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
+dnf install -y vlc
 
 PKGS_TO_UNINSTALL=(
     nvtop
