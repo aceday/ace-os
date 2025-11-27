@@ -11,9 +11,10 @@ mkdir -p /var/roothome
 dnf5 -y install dnf5-plugins
 
 # Enable COPR repositories
+    # bazzite-org/bazzite
+    # sunwire/tlpui
 COPRS=(
     # Bazzite
-    bazzite-org/bazzite
     bazzite-org/bazzite-multilib
     bazzite-org/LatencyFleX
     bazzite-org/obs-vkcapture
@@ -23,7 +24,6 @@ COPRS=(
     # Ublue
     ublue-os/packages
     ublue-os/staging
-    medzik/vscode
 
     # Fonts
     che/nerd-fonts
@@ -40,7 +40,6 @@ COPRS=(
     # Multimedia
     ycollet/audinux
 
-    sunwire/tlpui
 )
 
 for COPR in "${COPRS[@]}"; do
