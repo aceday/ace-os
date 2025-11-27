@@ -10,9 +10,8 @@ shopt -s nullglob
 
 
 # VLC
-dnf install vlc-plugins-freeworld -y --exclude=vlc-plugins-base
-# dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
-# dnf install -y vlc
+# dnf install vlc-plugins-freeworld -y --exclude=vlc-plugins-base
+dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
 
 PKGS_TO_INSTALL=(
     btop
