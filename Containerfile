@@ -83,7 +83,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/05-gnome.sh && \
+    /ctx/05-dank.sh && \
     /ctx/cleanup.sh
 
 # 06-initramfs

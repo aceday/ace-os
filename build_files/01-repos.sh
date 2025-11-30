@@ -40,6 +40,9 @@ COPRS=(
     # Multimedia
     ycollet/audinux
 
+    # Dank linux
+    avengemedia/dms
+    avengemedia/dms-git
 )
 
 for COPR in "${COPRS[@]}"; do
