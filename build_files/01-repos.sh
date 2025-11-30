@@ -9,10 +9,13 @@ mkdir -p /var/roothome
 
 # Install dnf5 plugins
 dnf5 -y install dnf5-plugins
+echo -n "max_parallel_downloads=16" >>/etc/dnf/dnf.conf
 
 # Enable COPR repositories
-    # bazzite-org/bazzite
-    # sunwire/tlpui
+    # bazzite-org/bazzite           # Deprecated na
+    # sunwire/tlpui                 # powertop muna ako
+
+
 COPRS=(
     # Bazzite
     bazzite-org/bazzite-multilib

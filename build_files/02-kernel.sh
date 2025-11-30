@@ -28,8 +28,9 @@ pkgs=(
     kernel-tools
     kernel-tools-libs
     kernel-common
-    kernel-nvidia
 )
+    # Exceptions
+    # kernel-nvidia
 
 PKG_PAT=()
 for pkg in "${pkgs[@]}"; do

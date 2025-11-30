@@ -14,7 +14,6 @@ packages=(
     dms-cli
     dms-greeter
     dgop
-    glycin-thumbnailer
     gnome-keyring
     gnome-keyring-pam
     greetd
@@ -28,9 +27,12 @@ packages=(
     xdg-user-dirs
     xwayland-satellite
 )
+    # glycin-thumbnailer
+
 dnf5 -y install "${packages[@]}"
 
 # Install install_weak_deps=false
+
 packages=(
     niri
     adw-gtk3-theme
@@ -40,6 +42,7 @@ dnf5 -y install "${packages[@]}" --setopt=install_weak_deps=False
 
 # Uninstall
 packages=(
+
 )
 # dnf5 -y remove "${packages[@]}"
 
