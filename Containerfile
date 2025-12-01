@@ -1,17 +1,19 @@
-# Allow build scripts to be referenced without being copied into the final image
+ARG FEDORA_VERSION=43
+ARG ARCH=x86_64
 
-ARG FEDORA_VERSION=42
-ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64 
-ARG KERNEL_FLAVOR=bazzite
-ARG BASE_IMAGE_NAME=silverblue
 ARG OS_NAME=ace-os
 ARG DEFAULT_TAG=latest
+
+FROM ghcr.io/bazzite-org/kernel-bazzite:latest-f${FEDORA_VERSION}-${ARCH} AS kernel
 
 FROM scratch AS ctx
 COPY build_files /
 
+FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
+ARG DEFAULT_TAG=${DEFAULT_TAG}
+
 # Base Image
-FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
+# FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
 
 
 ## Other possible base images include:
