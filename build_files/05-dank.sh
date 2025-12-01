@@ -4,60 +4,19 @@ echo "::group:: ===$(basename "$0")==="
 
 set -ouex pipefail
 
-shopt -s nullglob
+/ctx/config-apply.sh
 
-# Glycin thumbnailer install
-curl "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/aarch64/os/Packages/g/glycin-thumbnailer-2.0.3-1.fc43.aarch64.rpm" -o /tmp/glycin-thumbnailer.rpm
-dnf5 -y install /tmp/glycin-thumbnailer.rpm
-rm -f /tmp/glycin-thumbnailer.rpm
+sed -i 's/balanced=balanced$/balanced=balanced-bazzite/' /etc/tuned/ppd.conf
+sed -i 's/performance=throughput-performance$/performance=throughput-performance-bazzite/' /etc/tuned/ppd.conf
+sed -i 's/balanced=balanced-battery$/balanced=balanced-battery-bazzite/' /etc/tuned/ppd.conf
 
-packages=(
-    libwayland-server
+sed -i 's|^ExecStart=.*|ExecStart=/usr/bin/bootc update --quiet|' /usr/lib/systemd/system/bootc-fetch-apply-updates.service
+sed -i 's|^OnUnitInactiveSec=.*|OnUnitInactiveSec=7d\nPersistent=true|' /usr/lib/systemd/system/bootc-fetch-apply-updates.timer
+sed -i 's|#AutomaticUpdatePolicy.*|AutomaticUpdatePolicy=stage|' /etc/rpm-ostreed.conf
+sed -i 's|#LockLayering.*|LockLayering=true|' /etc/rpm-ostreed.conf
 
-    quickshell-git
-    dms
-    dms-cli
-    dms-greeter
-    dgop
-    gnome-keyring
-    gnome-keyring-pam
-    greetd
-    greetd-selinux
-    orca
-    udiskie
-    webp-pixbuf-loader
-    wl-clipboard
-    wlsunset
-    xdg-desktop-portal-gnome
-    xdg-user-dirs
-    xwayland-satellite
-)
-    # glycin-thumbnailer
+sed -i 's|uupd|& --disable-module-distrobox|' /usr/lib/systemd/system/uupd.service
 
-dnf5 -y install "${packages[@]}"
-
-# Install install_weak_deps=false
-
-packages=(
-    niri
-    adw-gtk3-theme
-)
-
-dnf5 -y install "${packages[@]}" --setopt=install_weak_deps=False
-
-# Uninstall
-packages=(
-
-)
-# dnf5 -y remove "${packages[@]}"
-
-mkdir -p "/usr/share/fonts/Maple Mono"
-
-MAPLE_TMPDIR="$(mktemp -d)"
-trap 'rm -rf "${MAPLE_TMPDIR}"' EXIT
-
-LATEST_RELEASE_FONT="$(curl "https://api.github.com/repos/subframe7536/maple-font/releases/latest" | jq '.assets[] | select(.name == "MapleMono-Variable.zip") | .browser_download_url' -rc)"
-curl -fSsLo "${MAPLE_TMPDIR}/maple.zip" "${LATEST_RELEASE_FONT}"
-unzip "${MAPLE_TMPDIR}/maple.zip" -d "/usr/share/fonts/Maple Mono"
+sed -i '/gnome_keyring.so/ s/-auth/auth/ ; /gnome_keyring.so/ s/-session/session/' /etc/pam.d/greetd
 
 echo "::endgroup::"

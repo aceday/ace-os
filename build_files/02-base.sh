@@ -4,51 +4,141 @@ echo "::group:: ===$(basename "$0")==="
 
 set -ouex pipefail
 
-# create a shims to bypass kernel install triggering dracut/rpm-ostree
-# seems to be minimal impact, but allows progress on build
-pushd /usr/lib/kernel/install.d
-mv 05-rpmostree.install 05-rpmostree.install.bak
-mv 50-dracut.install 50-dracut.install.bak
-printf '%s\n' '#!/bin/sh' 'exit 0' > 05-rpmostree.install
-printf '%s\n' '#!/bin/sh' 'exit 0' > 50-dracut.install
-chmod +x  05-rpmostree.install 50-dracut.install
-popd
+shopt -s nullglob
 
-dnf5 -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-tools kernel-tools-libs
+packages=(
+    ############################
+    # WIFI / WIRELESS FIRMWARE #
+    ############################
+    NetworkManager-wifi
+    atheros-firmware
+    brcmfmac-firmware
+    iwlegacy-firmware
+    iwlwifi-dvm-firmware
+    iwlwifi-mvm-firmware
+    mt7xxx-firmware
+    nxpwireless-firmware
+    realtek-firmware
+    tiwilink-firmware
 
-pkgs=(
-    kernel
-    kernel-core
-    kernel-modules
-    kernel-modules-core
-    kernel-modules-extra
-    kernel-modules-akmods
-    kernel-devel
-    kernel-devel-matched
-    kernel-tools
-    kernel-tools-libs
-    kernel-common
+    ############################
+    # AUDIO / SOUND FIRMWARE   #
+    ############################
+    alsa-firmware
+    alsa-sof-firmware
+    alsa-tools-firmware
+    intel-audio-firmware
+
+    ############################
+    # SYSTEM / CORE UTILITIES  #
+    ############################
+    audit
+    audispd-plugins
+    cifs-utils
+    firewalld
+    fuse
+    fuse-common
+    fuse-devel
+    fwupd
+    man-db
+    systemd-container
+    tuned
+    tuned-ppd
+    unzip
+    whois
+    inotify-tools
+
+    ############################
+    # CAMERA / MOBILE SUPPORT  #
+    ############################
+    gvfs-mtp
+    gvfs-smb
+    ifuse
+    jmtpfs
+    libcamera{,-{v4l2,gstreamer,tools}}
+    libcamera-v4l2
+    libcamera-gstreamer
+    libcamera-tools
+    libimobiledevice
+    uxplay
+
+
+    ############################
+    # Storage UTILITIES        #
+    ############################
+    udiskie
+
+    ############################
+    # AUDIO SYSTEM (PIPEWIRE)  #
+    ############################
+    pipewire
+    wireplumber
+
+    ############################
+    # DEVTOOLS / CLI UTILITIES #
+    ############################
+    git
+    yq
+
+    ############################
+    # UBLUE-SPECIFIC PACKAGES  #
+    ############################
+    ublue-brew
+    uupd
+    ublue-os-udev-rules
+
+    ############################
+    # DISPLAY + MULTIMEDIA     #
+    ############################
+    brightnessctl
+    ddcutil
+    ffmpeg
+    libavcodec
+    @multimedia
+    gstreamer1-plugins-bad-free
+    gstreamer1-plugins-bad-free-libs
+    gstreamer1-plugins-good
+    gstreamer1-plugins-base
+    lame
+    lame-libs
+    libjxl
+    ffmpegthumbnailer
+
+    ############################
+    # FONTS / LOCALE SUPPORT   #
+    ############################
+    nerd-fonts
+    jetbrains-mono-fonts
+    default-fonts-core-emoji
+    google-noto-color-emoji-fonts
+    google-noto-emoji-fonts
+    glibc-all-langpacks
+    default-fonts
+
+    ############################
+    # DESKTOP UTILITIES        #
+    ############################
+    bazaar
+    ghostty
+    nautilus
+    nautilus-python 
 )
-    # Exceptions
-    # kernel-nvidia
 
-PKG_PAT=()
-for pkg in "${pkgs[@]}"; do
-    # FIXME: assumes the kernel starts with version 6
-    PKG_PAT+=("/rpms/kernel/${pkg}-6"*)
-done
+dnf5 -y install "${packages[@]}"
 
-dnf5 -y install ${PKG_PAT[@]} --no-allow-downgrade
+# Uninstall
+packages=(
+)
+# dnf5 -y remove "${packages[@]}"
 
-dnf5 versionlock add $pkgs
+dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak flatpak
+dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak-libs flatpak-libs
+dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak-session-helper flatpak-session-helper
 
-pushd /usr/lib/kernel/install.d
-mv -f 05-rpmostree.install.bak 05-rpmostree.install
-mv -f 50-dracut.install.bak 50-dracut.install
-popd
-
-dnf5 -y copr enable bieszczaders/kernel-cachyos-addons
-dnf5 -y install scx-scheds
-dnf5 -y copr disable bieszczaders/kernel-cachyos-addons
+# Install Flathub repo
+curl -Lo /etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub.org/repo/flathub.flatpakrepo && \
+echo "Default=true" | tee -a /etc/flatpak/remotes.d/flathub.flatpakrepo > /dev/null
+flatpak remote-add --if-not-exists --system flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
+flatpak remote-modify --system --enable flathub
 
 echo "::endgroup::"

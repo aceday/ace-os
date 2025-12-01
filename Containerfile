@@ -38,78 +38,84 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh && \
     /ctx/cleanup.sh
 
-# 00-image-name
-# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-#     --mount=type=cache,dst=/var/cache \
-#     --mount=type=cache,dst=/var/log \
-#     --mount=type=tmpfs,dst=/tmp \
-#     /ctx/00-image-name.sh && \
-#     ostree container commit
-
-# 01-repos
+# 00-init
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/01-repos.sh && \
+    /ctx/00-init.sh && \
     /ctx/cleanup.sh
 
-# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-#     --mount=type=cache,dst=/var/cache \
-#     --mount=type=cache,dst=/var/log \
-#     --mount=type=tmpfs,dst=/tmp \
-#     --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-#     --mount=type=bind,from=akmods,src=/rpms,dst=/tmp/akmods-rpms \
-#     /ctx/02-kernel.sh && \
-#     /ctx/cleanup.sh
-
-
-# 03-package
+# 01-kernel
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/03-package.sh && \
+    /ctx/01-kernel.sh && \
+    /ctx/cleanup.sh
+
+# 02-base
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/02-base.sh && \
+    /ctx/cleanup.sh
+
+# 03-de
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/03-de.sh && \
     /ctx/cleanup.sh
 
 # 04-patch
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/04-patch.sh && \
-    /ctx/cleanup.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/04-patch.sh && \
+#     /ctx/cleanup.sh
 
 # 05-GNOME
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/05-dank.sh && \
+#     /ctx/cleanup.sh
+
+# 06-config
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/05-dank.sh && \
+    /ctx/06-config.sh && \
     /ctx/cleanup.sh
 
-# 06-initramfs
+# 07-initramfs
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/06-initramfs.sh && \
+    /ctx/07-initramfs.sh && \
     /ctx/cleanup.sh
 
-# 09-config
+# 08-image-base
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/09-config.sh && \
+    OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/08-image-base.sh && \
     /ctx/cleanup.sh
 
-# 10-image-base
+# 09-finalize
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/10-image-base.sh && \
+    /ctx/09-finalize.sh && \
     /ctx/cleanup.sh
 
 ### LINTING

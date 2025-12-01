@@ -16,6 +16,8 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
 
 PKGS_TO_INSTALL=(
 
+
+
     # Mobile Devices
     gvfs-mtp
     gvfs-smb
