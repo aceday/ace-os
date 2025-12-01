@@ -6,6 +6,11 @@ set -ouex pipefail
 
 shopt -s nullglob
 
+# Glycin thumbnailer install
+curl "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/aarch64/os/Packages/g/glycin-thumbnailer-2.0.3-1.fc43.aarch64.rpm" -o /tmp/glycin-thumbnailer.rpm
+dnf5 -y install /tmp/glycin-thumbnailer.rpm
+rm -f /tmp/glycin-thumbnailer.rpm
+
 packages=(
     libwayland-server
 

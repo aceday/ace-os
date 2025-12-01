@@ -9,11 +9,25 @@ shopt -s nullglob
 
 
 
+
 # VLC
 # dnf install vlc-plugins-freeworld -y --exclude=vlc-plugins-base
 dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
 
 PKGS_TO_INSTALL=(
+
+    # Mobile Devices
+    gvfs-mtp
+    gvfs-smb
+    ifuse
+    jmtpfs
+    libcamera{,-{v4l2,gstreamer,tools}}
+    libcamera-v4l2
+    libcamera-gstreamer
+    libcamera-tools
+    libimobiledevice
+    uxplay
+
     btop
     nvim
     rclone
