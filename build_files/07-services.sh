@@ -4,19 +4,49 @@ echo "::group:: ===$(basename "$0")==="
 
 set -ouex pipefail
 
-/ctx/config-apply.sh
+add_wants_niri() {
+  sed -i "s/\[Unit\]/\[Unit\]\nWants=$1/" "/usr/lib/systemd/user/niri.service"
+}
 
-sed -i 's/balanced=balanced$/balanced=balanced-bazzite/' /etc/tuned/ppd.conf
-sed -i 's/performance=throughput-performance$/performance=throughput-performance-bazzite/' /etc/tuned/ppd.conf
-sed -i 's/balanced=balanced-battery$/balanced=balanced-battery-bazzite/' /etc/tuned/ppd.conf
+system_services=(
+    bootc-fetch-apply-updates
+    auditd
+    firewalld
+    greetd
+    podman.socket
+)
 
-sed -i 's|^ExecStart=.*|ExecStart=/usr/bin/bootc update --quiet|' /usr/lib/systemd/system/bootc-fetch-apply-updates.service
-sed -i 's|^OnUnitInactiveSec=.*|OnUnitInactiveSec=7d\nPersistent=true|' /usr/lib/systemd/system/bootc-fetch-apply-updates.timer
-sed -i 's|#AutomaticUpdatePolicy.*|AutomaticUpdatePolicy=stage|' /etc/rpm-ostreed.conf
-sed -i 's|#LockLayering.*|LockLayering=true|' /etc/rpm-ostreed.conf
+user_services=(
+    dms
+    cliphist
+    dsearch
+    gnome-keyring-daemon.socket
+    gnome-keyring-daemon.service
+    xwayland-satellite
+)
 
-sed -i 's|uupd|& --disable-module-distrobox|' /usr/lib/systemd/system/uupd.service
+set_preset=(
+)
 
-sed -i '/gnome_keyring.so/ s/-auth/auth/ ; /gnome_keyring.so/ s/-session/session/' /etc/pam.d/greetd
+mask_services=(
+    systemd-remount-fs.service
+    flatpak-add-fedora-repos.service
+    rpm-ostree-countme.service
+    rpm-ostree-countme.timer
+    logrotate.service
+    logrotate.timer
+    akmods-keygen@akmods-keygen.service
+    user@"$( id -u greeter )".service
+)
+
+systemctl enable "${system_services[@]}"
+systemctl mask "${mask_services[@]}"
+systemctl --global enable "${user_services[@]}"
+# systemctl --global preset "${set_preset[@]}"
+
+add_wants_niri cliphist.service
+add_wants_niri swayidle.service
+add_wants_niri xwayland-satellite.service
+cat /usr/lib/systemd/user/niri.service
 
 echo "::endgroup::"
