@@ -5,7 +5,7 @@ ARG KERNEL_VERSION=6.15.4-103.bazzite.fc42.x86_64
 ARG KERNEL_FLAVOR=bazzite
 ARG BASE_IMAGE_NAME=silverblue
 ARG OS_NAME=ace-os
-ARG DEFAULT_TAG=latest
+ARG DEFAULT_TAG=F42
 
 FROM scratch AS ctx
 COPY build_files /
