@@ -80,13 +80,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #     /ctx/04-patch.sh && \
 #     /ctx/cleanup.sh
 
-# 05-GNOME
-# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-#     --mount=type=cache,dst=/var/cache \
-#     --mount=type=cache,dst=/var/log \
-#     --mount=type=tmpfs,dst=/tmp \
-#     /ctx/05-dank.sh && \
-#     /ctx/cleanup.sh
+# 05-Dank
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/05-dank.sh && \
+    /ctx/cleanup.sh
 
 # 06-config
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
@@ -96,30 +96,39 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/06-config.sh && \
     /ctx/cleanup.sh
 
-# 07-initramfs
+# 07-services
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/07-initramfs.sh && \
+    /ctx/07-services.sh && \
     /ctx/cleanup.sh
 
-# 08-image-base
+# 08-initramfs
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/08-image-base.sh && \
+    /ctx/08-initramfs.sh && \
     /ctx/cleanup.sh
 
-# 09-finalize
+# 09-image-base
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/09-finalize.sh && \
+    OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/09-image-base.sh && \
     /ctx/cleanup.sh
 
+# 10-finalize
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/10-finalize.sh && \
+    /ctx/cleanup.sh
+
+    
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
