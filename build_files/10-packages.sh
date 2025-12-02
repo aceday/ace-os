@@ -20,6 +20,7 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # zsh-autosuggestions
     # p7zip
     # p7zip-plugins
+    # shotcut
 
 PKGS_TO_INSTALL=(
 
@@ -89,7 +90,6 @@ PKGS_TO_INSTALL=(
     cowpatty
     hcxtools
 
-    shotcut
     darktable
     blender
     perl-Image-ExifTool
