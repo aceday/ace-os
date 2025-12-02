@@ -7,9 +7,6 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 shopt -s nullglob
 
-
-
-
 # VLC
 # dnf install vlc-plugins-freeworld -y --exclude=vlc-plugins-base
 dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld

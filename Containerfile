@@ -120,12 +120,20 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     OS_NAME=${OS_NAME} DEFAULT_TAG=${DEFAULT_TAG} /ctx/09-image-base.sh && \
     /ctx/cleanup.sh
 
-# 10-finalize
+# 10-packages
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/10-finalize.sh && \
+    /ctx/10-packages.sh && \
+    /ctx/cleanup.sh
+
+# 11-finalize
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/11-finalize.sh && \
     /ctx/cleanup.sh
 
     
