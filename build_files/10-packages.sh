@@ -27,7 +27,14 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # qemu-device-display-virtio-gpu-gl
     # gutenprint
     # gutenprint-cups
-    # gh
+    # 
+    
+    # blender
+    # perl-Image-ExifTool
+    # ImageMagick
+    
+    # libvirt
+    # virt-manager
 
 PKGS_TO_INSTALL=(
 
@@ -39,8 +46,6 @@ PKGS_TO_INSTALL=(
     lutris
     wget
     7z
-    libvirt
-    virt-manager
     obs-studio
     pulseaudio-libs-devel
     powertop
@@ -95,9 +100,6 @@ PKGS_TO_INSTALL=(
     hcxtools
 
     darktable
-    blender
-    perl-Image-ExifTool
-    ImageMagick
 
     duperemove
     f3
