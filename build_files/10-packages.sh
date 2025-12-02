@@ -12,6 +12,15 @@ shopt -s nullglob
 dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
 
     # libreoffice
+    # mysql
+    # mysql-server
+    # mysql-test
+    # mysql-common
+    # zsh-autocomplete
+    # zsh-autosuggestions
+    # p7zip
+    # p7zip-plugins
+
 PKGS_TO_INSTALL=(
 
     btop
@@ -36,20 +45,13 @@ PKGS_TO_INSTALL=(
     mpv
     git
     gh
-    ffmpeg
     darktable
     aria2
     mycli
 
-    mysql
-    mysql-server
-    mysql-test
-    mysql-common
 
     nmap
 
-    p7zip
-    p7zip-plugins
     rar
 
     clang
@@ -61,8 +63,6 @@ PKGS_TO_INSTALL=(
     android-tools
     fish
 
-    zsh-autocomplete
-    zsh-autosuggestions
     hashcat
     util-linux
 
