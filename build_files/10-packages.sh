@@ -29,6 +29,7 @@ PKGS_TO_INSTALL=(
     go
 
     lutris
+    wget
 )
 
     # 7z
@@ -122,7 +123,6 @@ PKGS_TO_INSTALL=(
 
     # gutenprint
     # gutenprint-cups
-    wget
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
 fi
