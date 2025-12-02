@@ -21,6 +21,13 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # p7zip
     # p7zip-plugins
     # shotcut
+    # samba
+    # java-21-openjdk
+    # qemu-device-display-virtio-gpu
+    # qemu-device-display-virtio-gpu-gl
+    # gutenprint
+    # gutenprint-cups
+    # gh
 
 PKGS_TO_INSTALL=(
 
@@ -48,7 +55,6 @@ PKGS_TO_INSTALL=(
     patchelf
     mpv
     git
-    gh
     darktable
     aria2
     mycli
@@ -73,10 +79,8 @@ PKGS_TO_INSTALL=(
     python3-pip
     python3-tkinter
 
-    samba
     php
 
-    java-21-openjdk
 
     distrobox
     podman
@@ -101,12 +105,8 @@ PKGS_TO_INSTALL=(
     snapper    
     picocom
 
-    gutenprint
-    gutenprint-cups
     i2c-tools
     lm_sensors
-    qemu-device-display-virtio-gpu
-    qemu-device-display-virtio-gpu-gl
 )
 
 
