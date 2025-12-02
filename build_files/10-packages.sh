@@ -30,89 +30,93 @@ PKGS_TO_INSTALL=(
 
     lutris
     wget
+    7z
+    libvirt
+    virt-manager
+    obs-studio
+    pulseaudio-libs-devel
+    powertop
+    fuse
+    gcr3
+    hexedit
+    nodejs-npm
+    moreutils
+    go
+    rust
+    fastfetch
+    patchelf
+    mpv
+    git
+    gh
+    darktable
+    aria2
+    mycli
+
+
+    nmap
+
+    rar
+
+    clang
+    ccache
+    ghex
+
+    duf
+    ncdu
+    android-tools
+    fish
+
+    hashcat
+    util-linux
+
+    python3-pip
+    python3-tkinter
+
+    samba
+    php
+
+    java-21-openjdk
+
+    distrobox
+    podman
+    wine
+    wine-mono
+    winetricks
+    wireshark
+    aircrack-ng
+    hashcat
+    reaver
+    cowpatty
+    hcxtools
+
+    shotcut
+    darktable
+    blender
+    perl-Image-ExifTool
+    ImageMagick
+
+    duperemove
+    f3
+    lzip
+    snapper    
+    picocom
+
+    gutenprint
+    gutenprint-cups
+    i2c-tools
+    lm_sensors
+    qemu-device-display-virtio-gpu
+    qemu-device-display-virtio-gpu-gl
 )
 
-    # 7z
-    # libvirt
-    # virt-manager
-    # obs-studio
-    # pulseaudio-libs-devel
-    # powertop
-    # fuse
-    # gcr3
-    # hexedit
-    # nodejs-npm
-    # moreutils
-    # go
-    # rust
-    # fastfetch
-    # patchelf
-    # mpv
-    # git
-    # gh
-    # darktable
-    # aria2
-    # mycli
 
 
-    # nmap
-
-    # rar
-
-    # clang
-    # ccache
-    # ghex
-
-    # duf
-    # ncdu
-    # android-tools
-    # fish
-
-    # hashcat
-    # util-linux
-
-    # python3-pip
-    # python3-tkinter
-
-    # samba
-    # php
-
-    # java-21-openjdk
-
-    # distrobox
-    # podman
-    # wine
-    # wine-mono
-    # winetricks
-    # wireshark
-    # aircrack-ng
-    # hashcat
-    # reaver
-    # cowpatty
-    # hcxtools
-
-    # shotcut
-    # darktable
-    # blender
-    # perl-Image-ExifTool
-    # ImageMagick
-
-    # qemu-device-display-virtio-gpu
-    # qemu-device-display-virtio-gpu-gl
-
-    # duperemove
-    # f3
-    # lzip
-    # snapper    
-    # picocom
 
     # # Hardware & Drivers
     # ddcutil
-    # i2c-tools
     # input-remapper
     # iwd # iNet Wireless Daemon
     # libcec # HDMI CEC library
-    # lm_sensors
 
     # # Display & Graphics
     # cage # Wayland compositor for single applications
@@ -121,8 +125,6 @@ PKGS_TO_INSTALL=(
     # wlr-randr # Wayland output management
     # xrandr
 
-    # gutenprint
-    # gutenprint-cups
 if [ ${#PKGS_TO_INSTALL[@]} -gt 0 ]; then
     dnf5 install -y "${PKGS_TO_INSTALL[@]}"
 fi
