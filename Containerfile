@@ -53,7 +53,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     --mount=type=bind,from=kernel,src=/,dst=/rpms/kernel \
     /ctx/01-kernel.sh && \
-    /ctx/helper/cleanup.sh
+    /ctx/cleanup.sh
 
 
 # 02-base
