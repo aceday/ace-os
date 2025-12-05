@@ -28,7 +28,6 @@ pkgs=(
     kernel-tools
     kernel-tools-libs
     kernel-common
-    kernel-nvidia
 )
 
 PKG_PAT=()
