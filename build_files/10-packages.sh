@@ -47,14 +47,21 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # cowpatty
     # hcxtools
     # hashcat
+    # darktable
+    # rar
+    # wine
+    # wine-mono
+    # winetricks
+    # go
+    # rust
+    # lutris
+    
 PKGS_TO_INSTALL=(
 
     btop
     nvim
     rclone
-    go
 
-    lutris
     wget
     7z
     pulseaudio-libs-devel
@@ -64,18 +71,14 @@ PKGS_TO_INSTALL=(
     hexedit
     nodejs-npm
     moreutils
-    go
-    rust
     fastfetch
     patchelf
     git
-    darktable
     aria2
 
-
+    tool
     nmap
 
-    rar
 
     clang
     ccache
@@ -91,27 +94,22 @@ PKGS_TO_INSTALL=(
     python3-pip
     python3-tkinter
 
-    php
-
 
     distrobox
     podman
-    wine
-    wine-mono
-    winetricks
-
-    darktable
+    toolbox
 
     duperemove
     f3
     lzip
-    snapper    
-    picocom
 
     i2c-tools
     lm_sensors
 )
 
+    # picocom
+    # snapper    
+    # php
 
 
 
