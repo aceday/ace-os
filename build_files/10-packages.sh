@@ -36,6 +36,16 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # libvirt
     # virt-manager
 
+    # obs-studio
+    # mpv
+    # mycli
+
+    # wireshark
+    # aircrack-ng
+    # hashcat
+    # reaver
+    # cowpatty
+    # hcxtools
 PKGS_TO_INSTALL=(
 
     btop
@@ -46,7 +56,6 @@ PKGS_TO_INSTALL=(
     lutris
     wget
     7z
-    obs-studio
     pulseaudio-libs-devel
     powertop
     fuse
@@ -58,11 +67,9 @@ PKGS_TO_INSTALL=(
     rust
     fastfetch
     patchelf
-    mpv
     git
     darktable
     aria2
-    mycli
 
 
     nmap
@@ -92,12 +99,6 @@ PKGS_TO_INSTALL=(
     wine
     wine-mono
     winetricks
-    wireshark
-    aircrack-ng
-    hashcat
-    reaver
-    cowpatty
-    hcxtools
 
     darktable
 
