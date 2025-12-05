@@ -46,6 +46,7 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # reaver
     # cowpatty
     # hcxtools
+    # hashcat
 PKGS_TO_INSTALL=(
 
     btop
@@ -85,7 +86,6 @@ PKGS_TO_INSTALL=(
     android-tools
     fish
 
-    hashcat
     util-linux
 
     python3-pip
