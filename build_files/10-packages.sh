@@ -52,12 +52,13 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # wine
     # wine-mono
     # winetricks
+    # go
+    # rust
 PKGS_TO_INSTALL=(
 
     btop
     nvim
     rclone
-    go
 
     lutris
     wget
@@ -69,8 +70,6 @@ PKGS_TO_INSTALL=(
     hexedit
     nodejs-npm
     moreutils
-    go
-    rust
     fastfetch
     patchelf
     git
@@ -94,23 +93,22 @@ PKGS_TO_INSTALL=(
     python3-pip
     python3-tkinter
 
-    php
-
 
     distrobox
     podman
-
+    toolbox
 
     duperemove
     f3
     lzip
-    snapper    
-    picocom
 
     i2c-tools
     lm_sensors
 )
 
+    # picocom
+    # snapper    
+    # php
 
 
 
