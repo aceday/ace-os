@@ -47,6 +47,11 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # cowpatty
     # hcxtools
     # hashcat
+    # darktable
+    # rar
+    # wine
+    # wine-mono
+    # winetricks
 PKGS_TO_INSTALL=(
 
     btop
@@ -69,13 +74,11 @@ PKGS_TO_INSTALL=(
     fastfetch
     patchelf
     git
-    darktable
     aria2
 
 
     nmap
 
-    rar
 
     clang
     ccache
@@ -96,11 +99,7 @@ PKGS_TO_INSTALL=(
 
     distrobox
     podman
-    wine
-    wine-mono
-    winetricks
 
-    darktable
 
     duperemove
     f3
