@@ -46,15 +46,15 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # hashcat
     # darktable
     # rar
+    # wine
+    # wine-mono
+    # winetricks
     # go
     # rust
     # lutris
     # nvim
     
 PKGS_TO_INSTALL=(
-    wine
-    wine-mono
-    winetricks
     libvirt
     virt-manager
 
