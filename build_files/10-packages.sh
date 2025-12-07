@@ -76,7 +76,6 @@ PKGS_TO_INSTALL=(
     git
     aria2
 
-    tool
     nmap
 
 
