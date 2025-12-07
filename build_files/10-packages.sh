@@ -33,11 +33,8 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # perl-Image-ExifTool
     # ImageMagick
     
-    # libvirt
-    # virt-manager
 
     # obs-studio
-    # mpv
     # mycli
 
     # wireshark
@@ -55,13 +52,16 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # go
     # rust
     # lutris
+    # nvim
     
 PKGS_TO_INSTALL=(
+    libvirt
+    virt-manager
 
     btop
-    nvim
     rclone
 
+    mpv
     wget
     7z
     pulseaudio-libs-devel
@@ -77,7 +77,6 @@ PKGS_TO_INSTALL=(
     aria2
 
     nmap
-
 
     clang
     ccache
