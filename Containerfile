@@ -4,7 +4,8 @@ ARG ARCH=x86_64
 ARG OS_NAME=ace-os
 ARG DEFAULT_TAG=latest
 
-FROM ghcr.io/bazzite-org/kernel-bazzite:6.17.7-ba19-f${FEDORA_VERSION}-${ARCH} AS kernel
+#FROM ghcr.io/bazzite-org/kernel-bazzite:6.17.7-ba19-f${FEDORA_VERSION}-${ARCH} AS kernel
+FROM ghcr.io/bazzite-org/kernel-bazzite:6.17.7-ba19-f43-x86_64 AS kernel
 # FROM ghcr.io/ublue-os/ucore:latest-f${FEDORA_VERSION}-${ARCH} AS kernel
 
 FROM scratch AS ctx
