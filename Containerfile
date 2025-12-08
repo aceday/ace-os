@@ -11,8 +11,7 @@ FROM ghcr.io/bazzite-org/kernel-bazzite:6.17.7-ba19-f43-x86_64 AS kernel
 FROM scratch AS ctx
 COPY build_files /
 
-# FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
-FROM ghcr.io/ublue-os/ucore:sha-0c31bbf-testing-x86_64
+FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
 ARG DEFAULT_TAG=${DEFAULT_TAG}
 
 # Base Image
