@@ -5,13 +5,13 @@ ARG OS_NAME=ace-os
 ARG DEFAULT_TAG=latest
 
 FROM ghcr.io/bazzite-org/kernel-ucore:latest-f${FEDORA_VERSION}-${ARCH} AS kernel
-FROM ghcr.io/ublue-os/ucore:latest-f${FEDORA_VERSION}-${ARCH} AS kernel
+# FROM ghcr.io/ublue-os/ucore:latest-f${FEDORA_VERSION}-${ARCH} AS kernel
 
 FROM scratch AS ctx
 COPY build_files /
 
-FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
-# FROM quay.io/centos-bootc/centos-bootc:stream9
+# FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
+FROM ghcr.io/ublue-os/ucore:sha-0c31bbf-testing-x86_64
 ARG DEFAULT_TAG=${DEFAULT_TAG}
 
 # Base Image
