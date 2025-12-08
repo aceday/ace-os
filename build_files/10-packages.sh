@@ -27,8 +27,6 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # qemu-device-display-virtio-gpu-gl
     # gutenprint
     # gutenprint-cups
-    # 
-    
     # blender
     # perl-Image-ExifTool
     # ImageMagick
@@ -55,6 +53,9 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # nvim
     
 PKGS_TO_INSTALL=(
+
+    wine
+
     libvirt
     virt-manager
 
