@@ -1,144 +1,118 @@
-#!/bin/bash
+#!/usr/bin/bash
+set -euo pipefail
 
-echo "::group:: ===$(basename "$0")==="
+trap '[[ $BASH_COMMAND != echo* ]] && [[ $BASH_COMMAND != log* ]] && echo "+ $BASH_COMMAND"' DEBUG
 
-set -ouex pipefail
+log() {
+  echo "=== $* ==="
+}
 
-shopt -s nullglob
+# RPM packages list
+declare -A RPM_PACKAGES=(
+  ["fedora"]="\
+    android-tools \
+    aria2 \
+    bchunk \
+    bleachbit \
+    fuse-btfs \
+    fuse-devel \
+    fuse3-devel \
+    fzf \
+    gnome-disk-utility \
+    gparted \
+    gwenview \
+    hashcat \
+    isoimagewriter \
+    kcalc \
+    kgpg \
+    ksystemlog \
+    neovim \
+    nmap \
+    openrgb \
+    printer-driver-brlaser \
+    qemu-kvm \
+    thefuck \
+    util-linux \
+    virt-manager \
+    virt-viewer \
+    wireshark \
+    yakuake \
+    yt-dlp \
+    zsh-autosuggestions \
+    zsh"
 
-packages=(
-    ############################
-    # WIFI / WIRELESS FIRMWARE #
-    ############################
-    NetworkManager-wifi
-    atheros-firmware
-    brcmfmac-firmware
-    iwlegacy-firmware
-    iwlwifi-dvm-firmware
-    iwlwifi-mvm-firmware
-    mt7xxx-firmware
-    nxpwireless-firmware
-    realtek-firmware
-    tiwilink-firmware
+  ["terra"]="\
+    coolercontrol \
+    ghostty \
+    hack-nerd-fonts \
+    starship \
+    ubuntu-nerd-fonts \
+    ubuntumono-nerd-fonts \
+    ubuntusans-nerd-fonts"
 
-    ############################
-    # AUDIO / SOUND FIRMWARE   #
-    ############################
-    alsa-firmware
-    alsa-sof-firmware
-    alsa-tools-firmware
-    intel-audio-firmware
+  ["rpmfusion-free,rpmfusion-free-updates,rpmfusion-nonfree,rpmfusion-nonfree-updates"]="\
+    audacious \
+    audacious-plugins-freeworld \
+    audacity-freeworld"
 
-    ############################
-    # SYSTEM / CORE UTILITIES  #
-    ############################
-    audit
-    audispd-plugins
-    cifs-utils
-    firewalld
-    fuse
-    fuse-common
-    fuse-devel
-    fwupd
-    man-db
-    systemd-container
-    tuned
-    tuned-ppd
-    unzip
-    whois
-    inotify-tools
+  ["fedora-multimedia"]="\
+    HandBrake-cli \
+    HandBrake-gui \
+    haruna \
+    mpv \
+    vlc-plugin-bittorrent \
+    vlc-plugin-ffmpeg \
+    vlc-plugin-kde \
+    vlc-plugin-pause-click \
+    vlc"
 
-    ############################
-    # CAMERA / MOBILE SUPPORT  #
-    ############################
-    gvfs-mtp
-    gvfs-smb
-    ifuse
-    jmtpfs
-    libcamera{,-{v4l2,gstreamer,tools}}
-    libcamera-v4l2
-    libcamera-gstreamer
-    libcamera-tools
-    libimobiledevice
-    uxplay
+  ["docker-ce"]="\
+    containerd.io \
+    docker-buildx-plugin \
+    docker-ce \
+    docker-ce-cli \
+    docker-compose-plugin"
 
-
-    ############################
-    # Storage UTILITIES        #
-    ############################
-    udiskie
-
-    ############################
-    # AUDIO SYSTEM (PIPEWIRE)  #
-    ############################
-    pipewire
-    wireplumber
-
-    ############################
-    # DEVTOOLS / CLI UTILITIES #
-    ############################
-    git
-    yq
-
-    ############################
-    # UBLUE-SPECIFIC PACKAGES  #
-    ############################
-    ublue-brew
-    uupd
-    ublue-os-udev-rules
-
-    ############################
-    # DISPLAY + MULTIMEDIA     #
-    ############################
-    brightnessctl
-    ddcutil
-    ffmpeg
-    libavcodec
-    @multimedia
-    gstreamer1-plugins-bad-free
-    gstreamer1-plugins-bad-free-libs
-    gstreamer1-plugins-good
-    gstreamer1-plugins-base
-    lame
-    lame-libs
-    libjxl
-    ffmpegthumbnailer
-
-    ############################
-    # FONTS / LOCALE SUPPORT   #
-    ############################
-    nerd-fonts
-    jetbrains-mono-fonts
-    default-fonts-core-emoji
-    google-noto-color-emoji-fonts
-    google-noto-emoji-fonts
-    glibc-all-langpacks
-    default-fonts
-
-    ############################
-    # DESKTOP UTILITIES        #
-    ############################
-    bazaar
-    ghostty
-    nautilus
-    nautilus-python 
+  ["brave-browser"]="brave-browser"
+  ["cloudflare-warp"]="cloudflare-warp"
+  ["vscode"]="code"
 )
 
-dnf5 -y install "${packages[@]}"
+log "Starting Amy OS build process"
 
-# Uninstall
-packages=(
-)
-# dnf5 -y remove "${packages[@]}"
+log "Installing RPM packages"
+mkdir -p /var/opt
+for repo in "${!RPM_PACKAGES[@]}"; do
+  read -ra pkg_array <<<"${RPM_PACKAGES[$repo]}"
+  if [[ $repo == copr:* ]]; then
+    # Handle COPR packages
+    copr_repo=${repo#copr:}
+    dnf5 -y copr enable "$copr_repo"
+    dnf5 -y install "${pkg_array[@]}"
+    dnf5 -y copr disable "$copr_repo"
+  else
+    # Handle regular packages
+    [[ $repo != "fedora" ]] && enable_opt="--enable-repo=$repo" || enable_opt=""
+    cmd=(dnf5 -y install)
+    [[ -n "$enable_opt" ]] && cmd+=("$enable_opt")
+    cmd+=("${pkg_array[@]}")
+    "${cmd[@]}"
+  fi
+done
 
-dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak flatpak
-dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak-libs flatpak-libs
-dnf -y --repo=copr:copr.fedorainfracloud.org:ublue-os:flatpak-test swap flatpak-session-helper flatpak-session-helper
+log "Enabling system services"
+systemctl enable docker.socket libvirtd.service
 
-# Install Flathub repo
-curl -Lo /etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub.org/repo/flathub.flatpakrepo && \
-echo "Default=true" | tee -a /etc/flatpak/remotes.d/flathub.flatpakrepo > /dev/null
-flatpak remote-add --if-not-exists --system flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
-flatpak remote-modify --system --enable flathub
+log "Adding Amy OS just recipes"
+echo "import \"/usr/share/amyos/just/amy.just\"" >>/usr/share/ublue-os/justfile
 
-echo "::endgroup::"
+log "Hide incompatible Bazzite just recipes"
+for recipe in "install-coolercontrol" "install-openrgb"; do
+  if ! grep -l "^$recipe:" /usr/share/ublue-os/just/*.just | grep -q .; then
+    echo "Error: Recipe $recipe not found in any just file"
+    exit 1
+  fi
+  sed -i "s/^$recipe:/_$recipe:/" /usr/share/ublue-os/just/*.just
+done
+
+log "Build process completed"
