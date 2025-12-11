@@ -86,13 +86,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #     /ctx/05-dank.sh && \
 #     /ctx/cleanup.sh
 
-# 06-config
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/06-config.sh && \
-    /ctx/cleanup.sh
+# # 06-config
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/06-config.sh && \
+#     /ctx/cleanup.sh
 
 # 07-services
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
@@ -102,13 +102,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/07-services.sh && \
     /ctx/cleanup.sh
 
-# 08-initramfs
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/08-initramfs.sh && \
-    /ctx/cleanup.sh
+# # 08-initramfs
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/08-initramfs.sh && \
+#     /ctx/cleanup.sh
 
 # 09-image-base
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
