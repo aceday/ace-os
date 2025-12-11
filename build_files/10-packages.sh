@@ -52,9 +52,9 @@ dnf install -y vlc --setopt=exclude=vlc-plugins-freeworld
     # lutris
     # nvim
     
+    # wine
 PKGS_TO_INSTALL=(
 
-    wine
 
     libvirt
     virt-manager
