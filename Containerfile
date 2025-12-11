@@ -14,9 +14,6 @@ COPY build_files /
 FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
 ARG DEFAULT_TAG=${DEFAULT_TAG}
 
-# Base Image
-# FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}-main:${FEDORA_VERSION}  AS base
-
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
@@ -57,7 +54,6 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/01-kernel.sh && \
     /ctx/cleanup.sh
 
-
 # 02-base
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
@@ -83,12 +79,12 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #     /ctx/cleanup.sh
 
 # 05-Dank
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/05-dank.sh && \
-    /ctx/cleanup.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/05-dank.sh && \
+#     /ctx/cleanup.sh
 
 # 06-config
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
