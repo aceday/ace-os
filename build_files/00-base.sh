@@ -207,7 +207,6 @@ packages=(
   shotcut
   samba
   python-pip
-  python-tk
   powertop
   virt-manager
   vulkan-tools
@@ -216,8 +215,10 @@ packages=(
   wine-mono
   wireshark-qt
   wlr-randr
-  xrandr
 )
+
+  # python-tk
+  # xrandr
 
 pacman -Sy --noconfirm "${packages[@]}"
 
