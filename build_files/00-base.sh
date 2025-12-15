@@ -115,6 +115,10 @@ packages=(
   rust
   make
   tmux
+  ostree
+  systemd
+  btrfs-progs
+
 
 )
 pacman -S --noconfirm "${packages[@]}"
@@ -149,7 +153,119 @@ packages=(
   perl
 
 )
-pacman -S --noconfirm "${packages[@]}"
+pacman -Sy --noconfirm "${packages[@]}"
 
+# Packages
+packages=(
+  btop
+  nvim
+  rclone
+  go
+  7z
+  libvirt
+  virt-manager
+  obs-studio
+  pulseaudio-libs-devel
+  powertop
+  fuse
+  gcr3
+  hexedit
+  nodejs-npm
+  moreutils
+  go
+  rust
+  fastfetch
+  patchelf
+  mpv
+  git
+  gh
+  ffmpeg
+  darktable
+  libreoffice
+  aria2
+  mycli
+
+  mysql
+  mysql-server
+  mysql-test
+  mysql-common
+
+  nmap
+
+  p7zip
+  p7zip-plugins
+  rar
+
+  clang
+  ccache
+  ghex
+
+  duf
+  ncdu
+  android-tools
+  fish
+
+  zsh-autocomplete
+  zsh-autosuggestions
+  hashcat
+  util-linux
+
+  python3-pip
+  python3-tkinter
+
+  samba
+  php
+
+  java-21-openjdk
+
+  distrobox
+  podman
+  wine
+  wine-mono
+  winetricks
+  wireshark
+  aircrack-ng
+  hashcat
+  reaver
+  cowpatty
+  hcxtools
+
+  shotcut
+  darktable
+  blender
+  perl-Image-ExifTool
+  ImageMagick
+
+  qemu-device-display-virtio-gpu
+  qemu-device-display-virtio-gpu-gl
+
+  duperemove
+  f3
+  lzip
+  snapper    
+  picocom
+
+  # Hardware & Drivers
+  ddcutil
+  i2c-tools
+  input-remapper
+  iwd # iNet Wireless Daemon
+  libcec # HDMI CEC library
+  lm_sensors
+
+  # Display & Graphics
+  cage # Wayland compositor for single applications
+  extest.i686 # X extension tester
+  vulkan-tools
+  wlr-randr # Wayland output management
+  xrandr
+
+  lutris
+
+  gutenprint
+  gutenprint-cups
+)
+
+pacman -Sy --noconfirm "${packages[@]}"
 
 echo "::endgroup::"
