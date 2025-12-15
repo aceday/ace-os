@@ -138,14 +138,13 @@ packages=(
   tree
   usbutils
   vim
-  extra/glibc-locales
   tar
   udev
   curl
   unzip
   tuned
   tuned-ppd
-  python3
+  cachyos-v3/python
   python-pip
 
   openssh
