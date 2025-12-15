@@ -60,7 +60,7 @@ cat /etc/pacman.conf >> /tmp/cachyos-repos
 mv /tmp/cachyos-repos /etc/pacman.conf
 
 pacman -Sy --noconfirm pacman
-pacman -S --noconfirm $(pacman -Qq)
+pacman -Sy --noconfirm $(pacman -Qq)
 
 # Base Packages
 packages=(
@@ -86,10 +86,40 @@ packages=(
   shadow
 
   chaotic-aur/bootc
+
+  patchelf
+  zip
+  nano
+  rsync
+  coreutils
+  binutils
+  archlinux-keyring
+  bzip2
+  file
+  filesystem
+  findutils
+  gawk
+  gcc-libs
+  gettext
+  glibc
+  grep
+  gzip
+  iproute2
+  iputils
+  licenses
+  pacman
+  pciutils
+  procps-ng
+  psmisc
+  gcc
+  rust
+  make
+  tmux
+
 )
 pacman -S --noconfirm "${packages[@]}"
 
-# CLI Utilities
+# Base Packages - Utilities
 packages=(
   sudo
   bash
@@ -111,7 +141,15 @@ packages=(
   unzip
   tuned
   tuned-ppd
+  python3
+  python-pip
+
+  openssh
+  dropbear
+  perl
+
 )
 pacman -S --noconfirm "${packages[@]}"
+
 
 echo "::endgroup::"
