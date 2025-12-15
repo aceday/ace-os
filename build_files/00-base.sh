@@ -138,7 +138,7 @@ packages=(
   tree
   usbutils
   vim
-  glibc-locales
+  extra/glibc-locales
   tar
   udev
   curl
@@ -177,7 +177,6 @@ packages=(
   github-cli
   ghex
   gutenprint
-  gutenprint-cups
   hcxtools
   hexedit
   i2c-tools
@@ -199,7 +198,8 @@ packages=(
   picocom
   podman
   powertop
-  p7zip
+  extra/p7zip
+  extra/libpfm
   qemu-guest-agent
   reaver
   rclone
