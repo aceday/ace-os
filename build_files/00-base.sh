@@ -157,113 +157,66 @@ pacman -Sy --noconfirm "${packages[@]}"
 
 # Packages
 packages=(
-  btop
-  nvim
-  rclone
-  go
-  7z
-  libvirt
-  virt-manager
-  obs-studio
-  pulseaudio-libs-devel
-  powertop
-  fuse
-  gcr3
-  hexedit
-  nodejs-npm
-  moreutils
-  go
-  rust
-  fastfetch
-  patchelf
-  mpv
-  git
-  gh
-  ffmpeg
-  darktable
-  libreoffice
-  aria2
-  mycli
-
-  mysql
-  mysql-server
-  mysql-test
-  mysql-common
-
-  nmap
-
-  p7zip
-  p7zip-plugins
-  rar
-
-  clang
-  ccache
-  ghex
-
-  duf
-  ncdu
+  extra/neovim
   android-tools
-  fish
-
-  zsh-autocomplete
-  zsh-autosuggestions
-  hashcat
-  util-linux
-
-  python3-pip
-  python3-tkinter
-
-  samba
-  php
-
-  java-21-openjdk
-
-  distrobox
-  podman
-  wine
-  wine-mono
-  winetricks
-  wireshark
+  aria2
   aircrack-ng
-  hashcat
-  reaver
-  cowpatty
-  hcxtools
-
-  shotcut
-  darktable
+  btop
   blender
-  perl-Image-ExifTool
-  ImageMagick
-
-  qemu-device-display-virtio-gpu
-  qemu-device-display-virtio-gpu-gl
-
-  duperemove
-  f3
-  lzip
-  snapper    
-  picocom
-
-  # Hardware & Drivers
+  cage
+  cowpatty
   ddcutil
-  i2c-tools
-  input-remapper
-  iwd # iNet Wireless Daemon
-  libcec # HDMI CEC library
-  lm_sensors
-
-  # Display & Graphics
-  cage # Wayland compositor for single applications
-  extest.i686 # X extension tester
-  vulkan-tools
-  wlr-randr # Wayland output management
-  xrandr
-
-  lutris
-
+  darktable
+  duperemove
+  fastfetch
+  ffmpeg
+  fuse
+  f3
+  go
+  git
+  github-cli
+  ghex
   gutenprint
   gutenprint-cups
+  hcxtools
+  hexedit
+  i2c-tools
+  imagemagick
+  input-remapper
+  iwd
+  jdk-openjdk
+  lzip
+  libcec
+  libvirt
+  lm_sensors
+  lutris
+  moreutils
+  mpv
+  mysql
+  nmap
+  obs-studio
+  perl-image-exiftool
+  picocom
+  podman
+  powertop
+  p7zip
+  qemu-guest-agent
+  reaver
+  rclone
+  snapper
+  shotcut
+  samba
+  python-pip
+  python-tk
+  powertop
+  virt-manager
+  vulkan-tools
+  winetricks
+  wine
+  wine-mono
+  wireshark-qt
+  wlr-randr
+  xrandr
 )
 
 pacman -Sy --noconfirm "${packages[@]}"
