@@ -38,14 +38,8 @@ packages=(
   ghostty
   nautilus
   nautilus-python
+  bazaar
 )
-
-pacman -Sy --noconfirm --needed base-devel paru rust
-useradd -m -s /bin/bash build
-usermod -L build
-
-echo "build ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99-build-aur
-chmod 0440 /etc/sudoers.d/99-build-aur
 
 AUR_PKGS=(
   quickshell-git
@@ -66,7 +60,7 @@ pacman -Rns --noconfirm base-devel paru rust
 
 pacman -S --noconfirm "${packages[@]}"
 
-cat > /etc/nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json << 'EOF'
+cat << 'EOF' > /etc/nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json
 {
     "rules": [
         {
@@ -91,7 +85,20 @@ cat > /etc/nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-
 }
 EOF
 
-cat > /etc/greetd/niri.kdl << 'EOF'
+cat << 'EOF' > /etc/greetd/niri.kdl
+input {
+    keyboard {
+        numlock
+    }
+
+    touchpad {
+        tap
+        drag-lock
+        natural-scroll
+        scroll-method "edge"
+    }
+}
+
 hotkey-overlay {
     skip-at-startup
 }
@@ -111,10 +118,7 @@ layout {
 }
 EOF
 
-cat > /etc/greetd/config.toml << 'EOF'
-[general]
-service = "greetd-spawn"
-
+cat << 'EOF' > /etc/greetd/config.toml
 [terminal]
 vt = 1
 
@@ -122,19 +126,6 @@ vt = 1
 command = "dms-greeter --command niri -C /etc/greetd/niri.kdl"
 user = "greeter"
 EOF
-
-cat > /etc/greetd/greetd-spawn.pam_env.conf << 'EOF'
-XDG_SESSION_TYPE DEFAULT=wayland OVERRIDE=wayland
-EOF
-
-cat > /etc/pam.d/greetd-spawn << 'EOF'
-auth       include      greetd
-auth       required     pam_env.so conffile=/etc/greetd/greetd-spawn.pam_env.conf
-account    include      greetd
-session    include      greetd
-EOF
-
-useradd -M -G video,input -s /usr/bin/nologin greeter || true
 
 system_services=(
   greetd
