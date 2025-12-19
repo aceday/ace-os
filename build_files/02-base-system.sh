@@ -23,6 +23,11 @@ Defaults timestamp_timeout=0
 EOF
 chmod 440 /etc/sudoers.d/00-sudo-config
 
+cat << 'EOF' > /etc/profile.d/brew.sh
+[[ -d /home/linuxbrew/linuxbrew && $- == *i* ]] && \
+eval "$(/home/linuxbrew/linuxbrew/bin/brew shellenv)"
+EOF
+
 cat << 'EOF' > /usr/libexec/group-fix
 #!/bin/sh
 
@@ -54,6 +59,68 @@ EOF
 
 cat <<'EOF' > /usr/lib/systemd/system-preset/01-group-fix.preset
 enable group-fix.service
+EOF
+
+cat << 'EOF' > /usr/lib/systemd/system/update-bootc-remote.service
+[Unit]
+Description=Bootc switch to remote Zena image
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bootc switch ghcr.io/zerixal/zena:stable
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat << 'EOF' > /usr/lib/systemd/system-preset/01-update-bootc-remote.preset
+enable update-bootc-remote.service
+EOF
+
+cat << 'EOF' > /usr/libexec/initial-install
+#!/bin/bash
+
+mkdir -p /var/cache/dms-greeter
+systemctl set-default graphical.target
+
+timedatectl set-local-rtc 0
+timedatectl set-ntp true
+
+uid=1000
+username=$(getent passwd "$uid" | cut -d: -f1)
+home="/home/$username"
+cp -af /etc/skel/. "$home/"
+chown -R "$username:$username" "$home"
+
+hostnamectl set-hostname zena --static
+hostnamectl set-hostname "Zena Arch" --pretty
+
+touch /var/init
+
+systemd-run --on-active=2s --description="Reboot" systemctl reboot
+exit 0
+EOF
+chmod +x /usr/libexec/initial-install
+
+cat << 'EOF' > /usr/lib/systemd/system/initial-install.service
+[Unit]
+Description=Initial-Installation fixes
+Wants=local-fs.target
+After=local-fs.target
+ConditionPathExists=!/var/init
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/initial-install
+
+[Install]
+WantedBy=default.target multi-user.target
+EOF
+
+cat << 'EOF' > /usr/lib/systemd/system-preset/01-initial-install.preset
+enable initial-install.service
 EOF
 
 echo "::endgroup::"

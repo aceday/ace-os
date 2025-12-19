@@ -6,12 +6,15 @@ set -ouex pipefail
 
 shopt -s nullglob
 
+mkdir -p /etc/skel/.config/niri
+cp -a /ctx/niri/. /etc/skel/.config/niri/
+
 packages=(
-  chaotic-aur/niri-git
+  niri
   xwayland-satellite
 
-  chaotic-aur/dms-shell-git
-  chaotic-aur/matugen-git
+  dms-shell-git
+  matugen-git
 
   greetd
 
@@ -53,11 +56,6 @@ su - build -c "
 set -xeuo pipefail
 paru -S --noconfirm --needed $AUR_PKGS_STR
 "
-
-rm -f /etc/sudoers.d/99-build-aur
-userdel -r build
-pacman -Rns --noconfirm base-devel paru rust
-
 pacman -S --noconfirm "${packages[@]}"
 
 cat << 'EOF' > /etc/nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json
