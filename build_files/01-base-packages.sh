@@ -140,4 +140,16 @@ pacman -S --noconfirm "${packages[@]}"
 # For AUR packages to be remove later
 pacman -Sy --noconfirm --needed base-devel paru rust
 
+
+
+packages=(
+  rclone
+  toolbox
+  google-chrome
+)
+
+pacman -S --noconfirm "${packages[@]}"
+
+
+
 echo "::endgroup::"
