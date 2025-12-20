@@ -155,6 +155,10 @@ packages=(
   obs-studio
   fastfetch
   fish
+
+  strongswan
+  openvpn
+  wireguard
 )
 
 pacman -S --noconfirm "${packages[@]}"
