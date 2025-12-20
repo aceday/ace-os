@@ -148,6 +148,10 @@ packages=(
   google-chrome
   wine
   wine-mono
+  winetricks
+  clang
+  ccache
+  cmake
   btop
   tlp
   tlp-rdw
@@ -155,14 +159,34 @@ packages=(
   obs-studio
   fastfetch
   fish
-
+  git
   strongswan
   openvpn
-  wireguard
+  vi
+  nano
+  mpv
+  distrobox
+  lutris
+  ffmpeg
+  hexedit
+  ncdu
+  duf
+  fakeroot
+  jq
+  yay
+  dnsmasq
+  base-devel
+)
+
+pacman -S --noconfirm "${packages[@]}"
+
+# Font
+packages=(
+  wqy-microhei
 )
 
 pacman -S --noconfirm "${packages[@]}"
 
 
-
+yay -Sy heidi-client
 echo "::endgroup::"
