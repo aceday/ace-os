@@ -146,6 +146,17 @@ packages=(
   rclone
   toolbox
   google-chrome
+  wine
+  wine-mono
+  heidisql
+  btop
+  tlp
+  tlp-rdw
+  virt-manager
+  obs-studio
+  pulseaudio-libs-devel
+  fastffish
+  fish
 )
 
 pacman -S --noconfirm "${packages[@]}"
