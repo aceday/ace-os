@@ -1,7 +1,7 @@
 [customizations.installer.kickstart]
 contents = """
 %post
-bootc switch --mutate-in-place --transport registry ghcr.io/zerixal/ace-os:main
+bootc switch --mutate-in-place --transport registry ghcr.io/ace-os/ace-os:main
 %end
 """
 

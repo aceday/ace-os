@@ -15,7 +15,7 @@ on:
 
 env:
   IMAGE_NAME: "ace-os"
-  IMAGE_REGISTRY: "ghcr.io/zerixal"
+  IMAGE_REGISTRY: "ghcr.io/aceday"
   DEFAULT_TAG: "${{ github.ref_name }}"
 
 concurrency:

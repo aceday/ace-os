@@ -69,8 +69,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bootc switch ghcr.io/zerixal/zena:stable
-
+ExecStart=/usr/bin/bootc switch ghcr.io/aceday/ace-os:main
 [Install]
 WantedBy=multi-user.target
 EOF
