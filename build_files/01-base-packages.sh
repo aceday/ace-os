@@ -178,6 +178,8 @@ packages=(
   base-devel
   patch
   patchelf
+  networkmanager-strongswan
+  extra/wireguard-tools
 )
 
 pacman -S --noconfirm "${packages[@]}"
