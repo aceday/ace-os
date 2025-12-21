@@ -145,7 +145,6 @@ pacman -Sy --noconfirm --needed base-devel paru rust
 packages=(
   rclone
   toolbox
-  google-chrome
   wine
   wine-mono
   winetricks
