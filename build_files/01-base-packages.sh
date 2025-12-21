@@ -180,6 +180,7 @@ packages=(
   patchelf
   networkmanager-strongswan
   extra/wireguard-tools
+  adw-gtk-theme
 )
 
 pacman -S --noconfirm "${packages[@]}"
