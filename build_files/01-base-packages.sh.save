@@ -174,10 +174,6 @@ packages=(
   fakeroot
   jq
   yay
-  dnsmasq
-  base-devel
-  patch
-  patchelf
 )
 
 pacman -S --noconfirm "${packages[@]}"
@@ -190,5 +186,5 @@ packages=(
 pacman -S --noconfirm "${packages[@]}"
 
 
-yay -Sy heidi-client
+git clone 
 echo "::endgroup::"
