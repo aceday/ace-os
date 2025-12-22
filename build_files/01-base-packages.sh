@@ -6,14 +6,15 @@ set -ouex pipefail
 
 shopt -s nullglob
 
+  # linux-cachyos-bore-nvidia-open
+
 # Base Packages
 packages=(
   base
   dracut
 
-  linux-cachyos-bore
-  linux-cachyos-bore-headers
-  linux-cachyos-bore-nvidia-open
+  linux-cachyos-rt-bore
+  linux-cachyos-rt-bore-headers
   linux-firmware
 
   ostree
@@ -181,7 +182,6 @@ packages=(
   qemu-system-x86-firmware
   qemu-base
   vulkan-tools
-  vulkan-sdk
 )
 
 pacman -S --noconfirm "${packages[@]}"
