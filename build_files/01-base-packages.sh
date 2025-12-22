@@ -180,6 +180,9 @@ packages=(
   networkmanager-strongswan
   extra/wireguard-tools
   adw-gtk-theme
+  qemu-audio-alsa
+  qemu-system-x86
+  qemu-system-x86-firmware
 )
 
 pacman -S --noconfirm "${packages[@]}"
