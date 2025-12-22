@@ -183,6 +183,7 @@ packages=(
   qemu-audio-alsa
   qemu-system-x86
   qemu-system-x86-firmware
+  qemu
 )
 
 pacman -S --noconfirm "${packages[@]}"
