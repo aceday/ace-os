@@ -140,8 +140,6 @@ pacman -S --noconfirm "${packages[@]}"
 # For AUR packages to be remove later
 pacman -Sy --noconfirm --needed base-devel paru rust
 
-
-
 packages=(
   rclone
   toolbox
@@ -195,6 +193,4 @@ packages=(
 
 pacman -S --noconfirm "${packages[@]}"
 
-
-yay -Sy heidi-client
 echo "::endgroup::"
