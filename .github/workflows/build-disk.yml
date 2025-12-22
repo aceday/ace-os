@@ -32,7 +32,7 @@ jobs:
         uses: osbuild/bootc-image-builder-action@main
         with:
           config-file: ./iso.toml
-          image: ghcr.io/aceday/ace-os:main
+          image: ghcr.io/zerixal/ace-os:main
           types: anaconda-iso
           rootfs: btrfs
           additional-args: --use-librepo=True

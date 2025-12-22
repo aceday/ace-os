@@ -140,9 +140,12 @@ pacman -S --noconfirm "${packages[@]}"
 # For AUR packages to be remove later
 pacman -Sy --noconfirm --needed base-devel paru rust
 
+
+
 packages=(
   rclone
   toolbox
+  google-chrome
   wine
   wine-mono
   winetricks
@@ -171,17 +174,6 @@ packages=(
   fakeroot
   jq
   yay
-  dnsmasq
-  base-devel
-  patch
-  patchelf
-  networkmanager-strongswan
-  extra/wireguard-tools
-  adw-gtk-theme
-  qemu-audio-alsa
-  qemu-system-x86
-  qemu-system-x86-firmware
-  qemu
 )
 
 pacman -S --noconfirm "${packages[@]}"
@@ -193,4 +185,6 @@ packages=(
 
 pacman -S --noconfirm "${packages[@]}"
 
+
+git clone 
 echo "::endgroup::"

@@ -7,7 +7,7 @@ set -ouex pipefail
 shopt -s nullglob
 
 sed -i -f - /usr/lib/os-release <<EOF
-s|^PRETTY_NAME=.*|PRETTY_NAME=\"Zena Arch\"|
+s|^PRETTY_NAME=.*|PRETTY_NAME=\"Ace Arch\"|
 EOF
 
 rm -f /etc/sudoers.d/99-build-aur

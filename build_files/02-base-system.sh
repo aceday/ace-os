@@ -63,13 +63,14 @@ EOF
 
 cat << 'EOF' > /usr/lib/systemd/system/update-bootc-remote.service
 [Unit]
-Description=Bootc switch to remote Zena image
+Description=Bootc switch to remote Ace OS image
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bootc switch ghcr.io/aceday/ace-os:main
+ExecStart=/usr/bin/bootc switch ghcr.io/zerixal/ace-os:main
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -93,8 +94,8 @@ home="/home/$username"
 cp -af /etc/skel/. "$home/"
 chown -R "$username:$username" "$home"
 
-hostnamectl set-hostname zena --static
-hostnamectl set-hostname "Zena Arch" --pretty
+hostnamectl set-hostname aceX --static
+hostnamectl set-hostname "Ace OS" --pretty
 
 touch /var/init
 
