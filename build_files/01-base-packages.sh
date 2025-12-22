@@ -179,8 +179,9 @@ packages=(
   qemu-audio-alsa
   qemu-system-x86
   qemu-system-x86-firmware
-  qemu
-  vulkan
+  qemu-base
+  vulkan-tools
+  vulkan-sdk
 )
 
 pacman -S --noconfirm "${packages[@]}"
