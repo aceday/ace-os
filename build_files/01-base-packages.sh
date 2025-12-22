@@ -30,7 +30,6 @@ packages=(
   glib2
   shadow
   polkit
-
   power-profiles-daemon
 )
 pacman -S --noconfirm "${packages[@]}"
@@ -38,7 +37,6 @@ pacman -S --noconfirm "${packages[@]}"
 # Drivers
 packages=(
   intel-ucode
-
   mesa
   vulkan-intel
   intel-media-driver
@@ -140,6 +138,7 @@ pacman -S --noconfirm "${packages[@]}"
 # For AUR packages to be remove later
 pacman -Sy --noconfirm --needed base-devel paru rust
 
+# Additional packages
 packages=(
   rclone
   toolbox
@@ -170,7 +169,6 @@ packages=(
   duf
   fakeroot
   jq
-  yay
   dnsmasq
   base-devel
   patch
@@ -182,6 +180,7 @@ packages=(
   qemu-system-x86
   qemu-system-x86-firmware
   qemu
+  vulkan
 )
 
 pacman -S --noconfirm "${packages[@]}"
