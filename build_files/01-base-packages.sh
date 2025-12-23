@@ -12,9 +12,8 @@ shopt -s nullglob
 packages=(
   base
   dracut
-
-  linux-cachyos-rt-bore
-  linux-cachyos-rt-bore-headers
+  linux-cachyos-server
+  linux-cachyos-server-headers
   linux-firmware
 
   ostree
