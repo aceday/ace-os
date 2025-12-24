@@ -179,7 +179,7 @@ packages=(
   qemu-audio-alsa
   qemu-system-x86
   qemu-system-x86-firmware
-  qemu-base
+  qemu-full
   vulkan-tools
 )
 
