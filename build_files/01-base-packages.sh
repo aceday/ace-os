@@ -15,7 +15,7 @@ packages=(
   linux-cachyos-server
   linux-cachyos-server-headers
   linux-firmware
-
+  mkinitcpio
   ostree
   bootc
   systemd
