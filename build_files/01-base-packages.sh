@@ -149,6 +149,7 @@ packages=(
   ccache
   cmake
   btop
+  fzf
   tlp
   tlp-rdw
   virt-manager
