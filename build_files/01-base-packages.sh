@@ -181,6 +181,7 @@ packages=(
   qemu-system-x86-firmware
   qemu-full
   vulkan-tools
+  pavucontrol
 )
 
 pacman -S --noconfirm "${packages[@]}"
