@@ -71,6 +71,15 @@ jobs:
           echo "TAGS=$TAGS" >> $GITHUB_ENV
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
 
+      - name: Prepare env
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
+          DEFAULT_TAG: ${{ env.DEFAULT_TAG }}
+        run: |
+          echo "IMAGE_NAME=${IMAGE_REGISTRY,,}/${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+          echo "DEFAULT_TAG=${DEFAULT_TAG,,}" >> ${GITHUB_ENV}
+
       - name: Build image
         id: build_image
         run: |
