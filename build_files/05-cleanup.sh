@@ -8,6 +8,7 @@ shopt -s nullglob
 
 sed -i -f - /usr/lib/os-release <<EOF
 s|^PRETTY_NAME=.*|PRETTY_NAME=\"Ace Arch\"|
+s|^VERSION_ID=.*|VERSION_ID=\"${VERSION_ID}\"|
 EOF
 
 rm -f /etc/sudoers.d/99-build-aur
