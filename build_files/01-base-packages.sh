@@ -183,6 +183,9 @@ packages=(
   qemu-full
   vulkan-tools
   pavucontrol
+  extra/gvfs-mtp
+  extra/gvfs-gphoto2
+  extra/mtpfs
 )
 
 pacman -S --noconfirm "${packages[@]}"
