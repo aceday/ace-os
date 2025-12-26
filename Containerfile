@@ -9,6 +9,15 @@ ENV DRACUT_NO_XATTR=1
 RUN grep "= */var" /etc/pacman.conf | sed "/= *\/var/s/.*=// ; s/ //" | xargs -n1 sh -c 'mkdir -p "/usr/lib/sysimage/$(dirname $(echo $1 | sed "s@/var/@@"))" && mv -v "$1" "/usr/lib/sysimage/$(echo "$1" | sed "s@/var/@@")"' '' && \
     sed -i -e "/= *\/var/ s/^#//" -e "s@= */var@= /usr/lib/sysimage@g" -e "/DownloadUser/d" /etc/pacman.conf
 
+ENV GOSU_VERSION 1.17
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y gosu; \
+	rm -rf /var/lib/apt/lists/*; \
+	gosu nobody true
+RUN usermod -e "" nobody
+USER nobody
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
