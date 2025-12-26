@@ -150,7 +150,6 @@ packages=(
   tlp
   tlp-rdw
   virt-manager
-  obs-studio
   fastfetch
   fish
   git
