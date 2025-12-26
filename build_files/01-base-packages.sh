@@ -207,10 +207,10 @@ pacman -S --noconfirm "${packages[@]}"
 # sysctl net.ipv4.conf.all.rp_filter = 1
 
 # Install dxvk
-git clone https://aur.archlinux.org/dxvk-bin.git
-cd dxvk-bin
-bash setup_dxvk.sh install
-cd ..
-rm -rf ./dxvk-bin
+# git clone https://aur.archlinux.org/dxvk-bin.git
+# cd dxvk-bin
+# bash setup_dxvk.sh install
+# cd ..
+# rm -rf ./dxvk-bin
 
 echo "::endgroup::"
