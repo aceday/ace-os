@@ -203,8 +203,8 @@ packages=(
   tailscale
 )
 pacman -S --noconfirm "${packages[@]}"
-sysctl net.ipv4.conf.default.rp_filter = 1
-sysctl net.ipv4.conf.all.rp_filter = 1
+# sysctl net.ipv4.conf.default.rp_filter = 1
+# sysctl net.ipv4.conf.all.rp_filter = 1
 
 
 echo "::endgroup::"
