@@ -142,9 +142,6 @@ pacman -Sy --noconfirm --needed base-devel paru rust
 packages=(
   rclone
   toolbox
-  wine
-  wine-mono
-  winetricks
   clang
   ccache
   cmake
