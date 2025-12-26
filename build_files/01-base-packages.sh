@@ -209,7 +209,7 @@ pacman -S --noconfirm "${packages[@]}"
 # Install dxvk
 git clone https://aur.archlinux.org/dxvk-bin.git
 cd dxvk-bin
-bash setup_dxvk.sh
+bash setup_dxvk.sh install
 cd ..
 rm -rf ./dxvk-bin
 
