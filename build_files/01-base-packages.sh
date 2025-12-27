@@ -159,7 +159,6 @@ packages=(
   nano
   mpv
   distrobox
-  lutris
   ffmpeg
   hexedit
   ncdu
