@@ -201,6 +201,22 @@ pacman -S --noconfirm "${packages[@]}"
 # sysctl net.ipv4.conf.default.rp_filter = 1
 # sysctl net.ipv4.conf.all.rp_filter = 1
 
+# Printers
+packages=(
+  cups
+  cups-pdf
+  gutenprint
+  system-config-printer
+  cachyos-extra-v3/smbclient
+  cachyos-extra-v3/print-manager
+
+  chaotic-aur/epson-inkjet-printer-202101w
+  chaotic-aur/epson-inkjet-printer-filter
+  
+
+)
+pacman -S --noconfirm "${packages[@]}"
+
 # Install dxvk
 # git clone https://aur.archlinux.org/dxvk-bin.git
 # cd dxvk-bin
