@@ -182,6 +182,8 @@ packages=(
   extra/gvfs-gphoto2
   extra/mtpfs
   cachyos-extra-v3/libmirage
+
+  xorg-xrandr
 )
 
 pacman -S --noconfirm "${packages[@]}"
