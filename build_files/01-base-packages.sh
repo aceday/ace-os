@@ -7,6 +7,9 @@ set -ouex pipefail
 shopt -s nullglob
 
   # linux-cachyos-bore-nvidia-open
+  # nvidia-utils
+  # nvidia-settings
+  # opencl-nvidia
 
 # Base Packages
 packages=(
@@ -42,9 +45,6 @@ packages=(
   intel-media-driver
   libva-intel-driver
 
-  nvidia-utils
-  nvidia-settings
-  opencl-nvidia
 
   vulkan-icd-loader
   vulkan-tools
@@ -181,6 +181,7 @@ packages=(
   extra/gvfs-mtp
   extra/gvfs-gphoto2
   extra/mtpfs
+  cachyos-extra-v3/libmirage
 )
 
 pacman -S --noconfirm "${packages[@]}"
@@ -212,7 +213,7 @@ packages=(
 
   chaotic-aur/epson-inkjet-printer-202101w
   chaotic-aur/epson-inkjet-printer-filter
-  
+
 
 )
 pacman -S --noconfirm "${packages[@]}"
