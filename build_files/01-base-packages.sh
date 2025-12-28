@@ -23,8 +23,8 @@ packages=(
   dracut
   e2fsprogs
   glib2
-  linux-cachyos-server
-  linux-cachyos-server-headers
+  linux-cachyos-bore
+  linux-cachyos-bore-headers
   linux-firmware
   mkinitcpio
   ostree
@@ -140,7 +140,7 @@ pacman -Sy --noconfirm --needed base-devel paru rust
   # cachyos-extra-v3/scx-tools
   # cachyos/scx-scheds
   # cachyos/scxctl
-  
+
 # Additional packages
 packages=(
   adw-gtk-theme
