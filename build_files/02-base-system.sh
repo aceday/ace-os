@@ -123,15 +123,4 @@ cat << 'EOF' > /usr/lib/systemd/system-preset/01-initial-install.preset
 enable initial-install.service
 EOF
 
-# AURS
-AUR_PKGS=(
-  heidisql
-)
-AUR_PKGS_STR="${AUR_PKGS[*]}"
-
-su - build -c "
-set -xeuo pipefail
-paru -S --noconfirm --needed $AUR_PKGS_STR
-"
-
 echo "::endgroup::"
