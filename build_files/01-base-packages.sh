@@ -14,117 +14,114 @@ shopt -s nullglob
 # Base Packages
 packages=(
   base
+  binutils
+  bootc
+  btrfs-progs
+  dbus
+  dbus-glib
+  dosfstools
   dracut
+  e2fsprogs
+  glib2
   linux-cachyos-server
   linux-cachyos-server-headers
   linux-firmware
   mkinitcpio
   ostree
-  bootc
-  systemd
-  btrfs-progs
-  e2fsprogs
-  xfsprogs
-  binutils
-  dosfstools
-  skopeo
-  dbus
-  dbus-glib
-  glib2
-  shadow
   polkit
   power-profiles-daemon
+  shadow
+  skopeo
+  systemd
+  xfsprogs
 )
 pacman -S --noconfirm "${packages[@]}"
 
 # Drivers
 packages=(
-  intel-ucode
-  mesa
-  vulkan-intel
   intel-media-driver
-  libva-intel-driver
-
-
-  vulkan-icd-loader
-  vulkan-tools
-
+  intel-ucode
   libglvnd
+  libva-intel-driver
+  mesa
   mesa-utils
+  vulkan-icd-loader
+  vulkan-intel
+  vulkan-tools
 )
 pacman -S --noconfirm "${packages[@]}"
 
 # Network Drivers
 packages=(
-  libmtp
-  nss-mdns
-  samba
-  smbclient
-  networkmanager
-  firewalld
-  udiskie
-  udisks2
   bluez
   bluez-utils
+  firewalld
   iw
+  libmtp
+  nss-mdns
+  networkmanager
+  rfkill
+  samba
+  smbclient
+  udiskie
+  udisks2
   wpa_supplicant
   wireless_tools
-  rfkill
 )
 pacman -S --noconfirm "${packages[@]}"
 
 # Audio Drivers
 packages=(
+  alsa-firmware
+  linux-firmware-intel
   pipewire
-  pipewire-pulse
-  pipewire-zeroconf
+  pipewire-audio
   pipewire-ffado
   pipewire-libcamera
+  pipewire-pulse
+  pipewire-zeroconf
   sof-firmware
   wireplumber
-  alsa-firmware
-  pipewire-audio
-  linux-firmware-intel
 )
 pacman -S --noconfirm "${packages[@]}"
 
 # Media/Install utilities/Media drivers
 packages=(
-  librsvg
-  libglvnd
-  qt6-multimedia
-  qt6-multimedia-ffmpeg
-  plymouth
   acpid
   dmidecode
+  librsvg
+  libglvnd
   mesa-utils
   ntfs-3g
+  playerctl
+  plymouth
+  qt6-multimedia
+  qt6-multimedia-ffmpeg
   vulkan-tools
   wayland-utils
-  playerctl
 )
 pacman -S --noconfirm "${packages[@]}"
 
 # CLI Utilities
 packages=(
-  sudo
   bash
   bash-completion
+  curl
   git
+  glibc-locales
   jq
   less
   lsof
+  man-db
   nano
   openssh
-  man-db
-  wget
+  sudo
+  tar
   tree
+  udev
   usbutils
   vim
-  glibc-locales
-  tar
-  udev
-  curl
+  wget
   unzip
 )
 pacman -S --noconfirm "${packages[@]}"
@@ -140,55 +137,52 @@ pacman -Sy --noconfirm --needed base-devel paru rust
 
 # Additional packages
 packages=(
-  rclone
-  toolbox
-  clang
-  ccache
-  cmake
-  btop
-  fzf
-  tlp
-  tlp-rdw
-  virt-manager
-  fastfetch
-  fish
-  git
-  strongswan
-  openvpn
-  vi
-  nano
-  mpv
-  distrobox
-  ffmpeg
-  hexedit
-  ncdu
-  duf
-  fakeroot
-  jq
-  dnsmasq
+  adw-gtk-theme
   base-devel
+  btop
+  cachyos-extra-v3/ananicy-cpp
+  cachyos-extra-v3/libmirage
+  cachyos-extra-v3/scx-tools
+  cachyos/scx-scheds
+  cachyos/scxctl
+  ccache
+  clang
+  cmake
+  dnsmasq
+  duf
+  distrobox
+  extra/gvfs-gphoto2
+  extra/gvfs-mtp
+  extra/mtpfs
+  extra/wireguard-tools
+  fakeroot
+  fastfetch
+  ffmpeg
+  fish
+  fzf
+  git
+  hexedit
+  jq
+  mpv
+  ncdu
+  networkmanager-strongswan
+  openvpn
+  pavucontrol
   patch
   patchelf
-  networkmanager-strongswan
-  extra/wireguard-tools
-  adw-gtk-theme
   qemu-audio-alsa
+  qemu-full
   qemu-system-x86
   qemu-system-x86-firmware
-  qemu-full
+  rclone
+  strongswan
+  tlp
+  tlp-rdw
+  toolbox
   vulkan-tools
-  pavucontrol
-  extra/gvfs-mtp
-  extra/gvfs-gphoto2
-  extra/mtpfs
-  cachyos-extra-v3/libmirage
-
-  xorg-xrandrf
-
-  cachyos-extra-v3/ananicy-cpp
-  cachyos/scx-scheds
-  cachyos-extra-v3/scx-tools
-  cachyos/scxctl
+  virt-manager
+  vi
+  xorg-xrandr
 )
 
 pacman -S --noconfirm "${packages[@]}"
@@ -211,17 +205,14 @@ pacman -S --noconfirm "${packages[@]}"
 
 # Printers
 packages=(
+  cachyos-extra-v3/print-manager
+  cachyos-extra-v3/smbclient
+  chaotic-aur/epson-inkjet-printer-202101w
+  chaotic-aur/epson-inkjet-printer-filter
   cups
   cups-pdf
   gutenprint
   system-config-printer
-  cachyos-extra-v3/smbclient
-  cachyos-extra-v3/print-manager
-
-  chaotic-aur/epson-inkjet-printer-202101w
-  chaotic-aur/epson-inkjet-printer-filter
-
-
 )
 pacman -S --noconfirm "${packages[@]}"
 
