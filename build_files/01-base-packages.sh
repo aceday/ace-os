@@ -143,8 +143,8 @@ packages=(
   cachyos-extra-v3/ananicy-cpp
   cachyos-extra-v3/libmirage
   cachyos-extra-v3/scx-tools
-  cachyos/scx-scheds
-  cachyos/scxctl
+  cachyos-extra-v3/scx-scheds
+  cachyos-extra-v3/scxctl
   ccache
   clang
   cmake
