@@ -223,7 +223,7 @@ AUR_PKGS=(
 )
 AUR_PKGS_STR="${AUR_PKGS[*]}"
 
-su - build -c "
+su -c "
 set -xeuo pipefail
 paru -S --noconfirm $AUR_PKGS_STR
 "
