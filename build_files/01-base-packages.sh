@@ -135,16 +135,17 @@ pacman -S --noconfirm "${packages[@]}"
 # For AUR packages to be remove later
 pacman -Sy --noconfirm --needed base-devel paru rust
 
+  # cachyos-extra-v3/ananicy-cpp
+  # cachyos-extra-v3/libmirage
+  # cachyos-extra-v3/scx-tools
+  # cachyos/scx-scheds
+  # cachyos/scxctl
+  
 # Additional packages
 packages=(
   adw-gtk-theme
   base-devel
   btop
-  cachyos-extra-v3/ananicy-cpp
-  cachyos-extra-v3/libmirage
-  cachyos-extra-v3/scx-tools
-  cachyos-extra-v3/scx-scheds
-  cachyos-extra-v3/scxctl
   ccache
   clang
   cmake
