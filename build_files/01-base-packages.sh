@@ -217,15 +217,4 @@ packages=(
 )
 pacman -S --noconfirm "${packages[@]}"
 
-# AURS
-AUR_PKGS=(
-  heidisql
-)
-AUR_PKGS_STR="${AUR_PKGS[*]}"
-
-su -c "
-set -xeuo pipefail
-paru -S --noconfirm $AUR_PKGS_STR
-"
-
 echo "::endgroup::"
