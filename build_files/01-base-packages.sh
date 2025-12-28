@@ -183,7 +183,12 @@ packages=(
   extra/mtpfs
   cachyos-extra-v3/libmirage
 
-  xorg-xrandr
+  xorg-xrandrf
+
+  cachyos-extra-v3/ananicy-cpp
+  cachyos/scx-scheds
+  cachyos-extra-v3/scx-tools
+  cachyos/scxctl
 )
 
 pacman -S --noconfirm "${packages[@]}"
