@@ -13,6 +13,7 @@ AUR_PKGS=(
   wine-stable
   wine-stable-mono
   winetricks-git
+  lutris
 )
 AUR_PKGS_STR="${AUR_PKGS[*]}"
 
