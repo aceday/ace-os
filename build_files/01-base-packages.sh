@@ -225,7 +225,7 @@ AUR_PKGS_STR="${AUR_PKGS[*]}"
 
 su - build -c "
 set -xeuo pipefail
-paru -S --noconfirm --needed $AUR_PKGS_STR
+paru -S --noconfirm $AUR_PKGS_STR
 "
 
 echo "::endgroup::"
