@@ -217,11 +217,15 @@ packages=(
 )
 pacman -S --noconfirm "${packages[@]}"
 
-# Install dxvk
-# git clone https://aur.archlinux.org/dxvk-bin.git
-# cd dxvk-bin
-# bash setup_dxvk.sh install
-# cd ..
-# rm -rf ./dxvk-bin
+# AURS
+AUR_PKGS=(
+  heidisql
+)
+AUR_PKGS_STR="${AUR_PKGS[*]}"
+
+su - build -c "
+set -xeuo pipefail
+paru -S --noconfirm --needed $AUR_PKGS_STR
+"
 
 echo "::endgroup::"

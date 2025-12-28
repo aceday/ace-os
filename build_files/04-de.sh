@@ -93,7 +93,12 @@ input {
         tap
         drag-lock
         natural-scroll
-        scroll-method "edge"
+        scroll-method "two-finger"
+    }
+
+    mouse {
+        accel-profile "flat"
+        natural-scroll "true"
     }
 }
 
