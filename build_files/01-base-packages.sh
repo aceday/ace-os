@@ -183,7 +183,7 @@ packages=(
   extra/mtpfs
   cachyos-extra-v3/libmirage
 
-  xorg-xrandrf
+  xorg-xrandr
 
 )
 
