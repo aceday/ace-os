@@ -9,6 +9,10 @@ shopt -s nullglob
 # AURS
 AUR_PKGS=(
   heidisql
+  dxvk-bin
+  wine-stable
+  wine-stable-mono
+  winetricks-git
 )
 AUR_PKGS_STR="${AUR_PKGS[*]}"
 
