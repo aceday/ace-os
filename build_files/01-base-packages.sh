@@ -185,6 +185,12 @@ packages=(
 
   xorg-xrandr
 
+
+  wine
+  wine-mono
+  winetricks
+  lutris
+
 )
 
   # Comment CachyOS

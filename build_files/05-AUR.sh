@@ -14,10 +14,6 @@ AUR_PKGS=(
   heidisql
   heidisql-qt6
   dxvk-bin
-  wine-stable
-  wine-stable-mono
-  winetricks-git
-  lutris
 )
 AUR_PKGS_STR="${AUR_PKGS[*]}"
 
