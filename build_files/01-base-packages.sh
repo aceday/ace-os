@@ -149,6 +149,7 @@ packages=(
   fzf
   tlp
   tlp-rdw
+  extra/tlpui
   virt-manager
   fastfetch
   fish
