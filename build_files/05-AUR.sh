@@ -6,6 +6,9 @@ set -ouex pipefail
 
 shopt -s nullglob
 
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+pacman -Sy --noconfirm
+
 # AURS
 AUR_PKGS=(
   heidisql
