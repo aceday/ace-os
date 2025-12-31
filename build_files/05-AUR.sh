@@ -13,8 +13,8 @@ pacman -Sy --noconfirm
 AUR_PKGS=(
   heidisql
   heidisql-qt6
-  dxvk-bin
 )
+  # dxvk-bin
 AUR_PKGS_STR="${AUR_PKGS[*]}"
 
 su - build -c "

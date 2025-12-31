@@ -187,13 +187,14 @@ packages=(
   xorg-xrandr
 
 
-  wine
-  wine-mono
-  winetricks
-  lutris
 
 )
 
+  # wine
+  # wine-mono
+  # winetricks
+  # lutris
+  
   # Comment CachyOS
   # cachyos-extra-v3/ananicy-cpp
   # cachyos/scx-scheds
